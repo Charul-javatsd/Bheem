@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Bheem's Ultimate Math World 🦸</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Bheem's Ultimate Math World 🦸</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&family=Bangers&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+  --or:#FF9933;--gr:#0ea056;--bl:#0a2d7a;--gd:#FFD700;
+  --pk:#FF6B9D;--pu:#7C3AED;--tl:#0891B2;--rd:#EF4444;
+  --bg:#07091a;--card:#121630;--card2:#1a1f40;--card3:#0d1025;
+  --school:#0ea056;--imo:#FF9933;--national:#EF4444;--global:#7C3AED;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:#fff;min-height:100vh;overflow-x:hidden;}
+
+/* ══════════════ SPLASH ══════════════ */
+#splash{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;overflow:hidden;}
+#splash.hide{opacity:0;pointer-events:none;transition:opacity .5s;}
+.sp-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.sp-particle{position:absolute;border-radius:50%;animation:spFloat linear infinite;}
+@keyframes spFloat{0%{transform:translateY(100vh) rotate(0deg);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-100px) rotate(360deg);opacity:0}}
+.sp-body{position:relative;z-index:10;width:100%;max-width:420px;display:flex;flex-direction:column;align-items:center;gap:12px;}
+.sp-char{font-size:80px;animation:bounce 1.2s ease-in-out infinite alternate;display:block;}
+@keyframes bounce{0%{transform:translateY(0) rotate(-5deg)}100%{transform:translateY(-14px) rotate(5deg)}}
+.sp-title{font-family:'Bangers',cursive;font-size:38px;color:var(--gd);letter-spacing:3px;text-align:center;text-shadow:3px 3px 0 var(--or);}
+.sp-sub{font-family:'Fredoka One',cursive;font-size:14px;color:#C4B5FD;text-align:center;}
+.sp-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:20px;width:100%;display:flex;flex-direction:column;gap:14px;}
+.sp-label{font-family:'Fredoka One',cursive;font-size:13px;color:var(--gd);}
+#spName{width:100%;padding:13px 18px;border-radius:16px;border:2px solid var(--or);background:#1a0d2e;color:#fff;font-family:'Fredoka One',cursive;font-size:17px;text-align:center;}
+#spName:focus{outline:none;border-color:var(--gd);}
+#spName::placeholder{color:rgba(255,255,255,.3);}
+.level-pick{display:flex;flex-direction:column;gap:8px;}
+.lp-label{font-family:'Fredoka One',cursive;font-size:13px;color:#C4B5FD;}
+.lp-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.lp-btn{padding:12px 8px;border-radius:14px;border:2px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);cursor:pointer;transition:all .25s;text-align:center;}
+.lp-btn:hover,.lp-btn.sel{transform:scale(1.04);}
+.lp-btn.sel{border-width:2px;}
+.lp-em{font-size:26px;display:block;margin-bottom:4px;}
+.lp-name{font-family:'Bangers',cursive;font-size:14px;letter-spacing:1px;}
+.lp-desc{font-size:10px;opacity:.7;font-family:'Fredoka One',cursive;margin-top:2px;}
+.lp-btn[data-l="school"]{border-color:var(--school);}.lp-btn[data-l="school"].sel{background:rgba(14,160,86,.2);}
+.lp-btn[data-l="imo"]{border-color:var(--or);}.lp-btn[data-l="imo"].sel{background:rgba(255,153,51,.2);}
+.lp-btn[data-l="national"]{border-color:var(--rd);}.lp-btn[data-l="national"].sel{background:rgba(239,68,68,.2);}
+.lp-btn[data-l="global"]{border-color:var(--pu);}.lp-btn[data-l="global"].sel{background:rgba(124,58,237,.2);}
+.sp-start{width:100%;padding:14px;background:var(--or);color:#fff;border:none;border-radius:18px;font-family:'Bangers',cursive;font-size:22px;letter-spacing:2px;cursor:pointer;transition:transform .2s;}
+.sp-start:hover{transform:scale(1.03);}
+
+/* ══════════════ LEVEL INDICATOR ══════════════ */
+.level-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:20px;font-family:'Fredoka One',cursive;font-size:11px;margin-bottom:10px;}
+.lb-school{background:rgba(14,160,86,.2);border:1px solid var(--school);color:#6EE7B7;}
+.lb-imo{background:rgba(255,153,51,.2);border:1px solid var(--or);color:#FCD34D;}
+.lb-national{background:rgba(239,68,68,.2);border:1px solid var(--rd);color:#FCA5A5;}
+.lb-global{background:rgba(124,58,237,.2);border:1px solid var(--pu);color:#C4B5FD;}
+
+/* ══════════════ TOPBAR ══════════════ */
+.topbar{background:linear-gradient(135deg,#1a0a00,#2a1200);border-bottom:2px solid var(--or);padding:9px 14px;display:flex;align-items:center;gap:8px;position:sticky;top:0;z-index:100;}
+.tb-char{font-size:26px;}
+.tb-title{font-family:'Bangers',cursive;font-size:16px;letter-spacing:2px;flex:1;}
+.tb-level{font-family:'Fredoka One',cursive;font-size:10px;padding:3px 9px;border-radius:10px;cursor:pointer;transition:all .2s;}
+.tb-stars{font-size:12px;color:var(--gd);font-weight:900;}
+.tb-name{font-family:'Fredoka One',cursive;font-size:11px;background:rgba(255,255,255,.15);padding:3px 9px;border-radius:10px;cursor:pointer;}
+
+/* ══════════════ NAV ══════════════ */
+.nav{display:flex;overflow-x:auto;background:var(--card);border-bottom:2px solid rgba(255,153,51,.3);scrollbar-width:none;padding:0 6px;}
+.nav::-webkit-scrollbar{display:none;}
+.nb{padding:10px 12px;border:none;background:none;color:rgba(255,255,255,.45);font-family:'Fredoka One',cursive;font-size:11px;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .2s;display:flex;align-items:center;gap:4px;}
+.nb:hover{color:#fff;}
+.nb.on{color:var(--gd);border-bottom-color:var(--gd);}
+
+/* ══════════════ SECTIONS ══════════════ */
+.sec{display:none;padding:14px;max-width:960px;margin:0 auto;}
+.sec.on{display:block;}
+
+/* ══════════════ HERO BANNER ══════════════ */
+.hero-banner{border-radius:20px;padding:20px;margin-bottom:16px;position:relative;overflow:hidden;border:2px solid var(--gd);}
+.hero-banner::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,#1a0533,#0d1f44);z-index:0;}
+.hero-content{position:relative;z-index:1;}
+.hero-chars{display:flex;justify-content:center;gap:10px;font-size:44px;margin-bottom:10px;}
+.hero-chars span{animation:bounce 1.5s ease-in-out infinite alternate;}
+.hero-chars span:nth-child(2){animation-delay:.25s;}
+.hero-chars span:nth-child(3){animation-delay:.5s;}
+.hero-chars span:nth-child(4){animation-delay:.75s;}
+.hero-title{font-family:'Bangers',cursive;font-size:26px;color:var(--gd);letter-spacing:2px;text-align:center;}
+.hero-sub{font-size:12px;color:#C4B5FD;text-align:center;margin-top:4px;}
+
+/* ══════════════ SUMMARY ══════════════ */
+.sum-card{background:linear-gradient(135deg,#0d1f44,#1a0533);border:2px solid var(--gd);border-radius:18px;padding:18px;margin-bottom:16px;}
+.sum-hdr{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.sum-icon{font-size:30px;}
+.sum-title{font-family:'Bangers',cursive;font-size:19px;color:var(--gd);letter-spacing:1px;}
+.sum-pts{display:flex;flex-direction:column;gap:7px;}
+.sum-pt{display:flex;gap:8px;font-size:13px;color:#E0E7FF;line-height:1.7;}
+.sum-dot{width:7px;height:7px;border-radius:50%;background:var(--or);margin-top:6px;flex-shrink:0;}
+.kw-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.kw{background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);border-radius:12px;padding:3px 10px;font-family:'Fredoka One',cursive;font-size:10px;color:var(--gd);}
+
+/* ══════════════ TOPIC CARD ══════════════ */
+.tc{background:var(--card);border-radius:16px;padding:18px;margin-bottom:14px;border-left:4px solid var(--or);position:relative;overflow:hidden;}
+.tc::after{content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:var(--or);opacity:.04;}
+.tc-num{font-family:'Fredoka One',cursive;font-size:10px;color:var(--or);letter-spacing:2px;margin-bottom:4px;}
+.tc-title{font-family:'Fredoka One',cursive;font-size:18px;margin-bottom:8px;}
+.tc-body{font-size:13px;color:#A5B4FC;line-height:1.9;}
+.tc-body strong{color:#fff;}
+
+/* ══════════════ FORMULA BOX ══════════════ */
+.fbox{background:rgba(255,153,51,.1);border:2px solid rgba(255,153,51,.4);border-radius:12px;padding:11px 14px;margin:10px 0;font-family:'Fredoka One',cursive;font-size:14px;color:var(--gd);display:flex;align-items:center;gap:8px;}
+
+/* ══════════════ BHEEM TIP ══════════════ */
+.btip{background:linear-gradient(135deg,rgba(255,153,51,.08),rgba(255,153,51,.03));border-left:3px solid var(--or);border-radius:0 12px 12px 0;padding:12px 14px;margin:10px 0;display:flex;gap:10px;font-size:12px;color:#FED7AA;line-height:1.8;}
+
+/* ══════════════ EXAMPLE BOX ══════════════ */
+.ex-box{border-radius:14px;padding:15px;margin:10px 0;}
+.ex-box.solved{background:rgba(8,145,178,.08);border:2px solid rgba(8,145,178,.3);}
+.ex-box.practice{background:rgba(14,160,86,.06);border:2px dashed rgba(14,160,86,.4);}
+.ex-tag{font-family:'Bangers',cursive;font-size:13px;letter-spacing:1px;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.ex-q{font-size:13px;color:#E0E7FF;line-height:1.7;margin-bottom:10px;font-weight:700;}
+.ex-steps{display:flex;flex-direction:column;gap:6px;}
+.ex-step{display:flex;gap:8px;font-size:12px;color:#A5B4FC;line-height:1.6;}
+.ex-step-n{width:22px;height:22px;border-radius:50%;background:rgba(255,153,51,.2);border:1px solid var(--or);display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:10px;color:var(--or);flex-shrink:0;margin-top:2px;}
+.ex-ans{background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);border-radius:8px;padding:8px 12px;font-family:'Fredoka One',cursive;font-size:14px;color:var(--gd);margin-top:8px;text-align:center;}
+.prac-inp{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:8px 12px;color:#fff;font-size:12px;font-family:'Nunito',sans-serif;margin-top:8px;resize:none;}
+.prac-inp:focus{outline:none;border-color:var(--gr);}
+.show-sol-btn{margin-top:8px;padding:6px 14px;background:rgba(14,160,86,.15);border:1px solid var(--school);border-radius:10px;font-family:'Fredoka One',cursive;font-size:11px;color:var(--school);cursor:pointer;transition:all .2s;}
+.show-sol-btn:hover{background:var(--school);color:#fff;}
+.prac-sol{background:rgba(14,160,86,.08);border:1px solid rgba(14,160,86,.2);border-radius:8px;padding:10px 12px;margin-top:8px;font-size:12px;color:#6EE7B7;line-height:1.7;display:none;}
+.prac-sol.open{display:block;}
+
+/* ══════════════ AI HELP ══════════════ */
+.ai-help-row{margin:10px 0;}
+.ai-help-btn{width:100%;padding:10px 14px;background:linear-gradient(135deg,#1e0a3c,#2d1060);border:2px dashed rgba(124,58,237,.5);border-radius:12px;color:#C4B5FD;font-family:'Fredoka One',cursive;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .2s;}
+.ai-help-btn:hover{border-style:solid;background:linear-gradient(135deg,#2d1060,#3d1a80);}
+.ai-panel{background:var(--card3);border:2px solid var(--pu);border-radius:14px;overflow:hidden;display:none;margin-top:6px;}
+.ai-panel.open{display:block;}
+.ai-panel-hdr{background:linear-gradient(135deg,var(--pu),#5b21b6);padding:10px 14px;display:flex;align-items:center;gap:8px;}
+.ai-panel-title{font-family:'Bangers',cursive;font-size:14px;letter-spacing:1px;}
+.ai-level-tabs{display:flex;gap:5px;padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.06);flex-wrap:wrap;}
+.alt{padding:5px 10px;border-radius:10px;font-family:'Fredoka One',cursive;font-size:10px;cursor:pointer;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.05);color:rgba(255,255,255,.6);transition:all .2s;}
+.alt.on{background:var(--pu);border-color:var(--pu);color:#fff;}
+.ai-content{padding:12px;}
+.ai-vis{background:rgba(255,153,51,.08);border:1px solid rgba(255,153,51,.2);border-radius:10px;padding:10px 12px;margin:8px 0;font-family:'Fredoka One',cursive;font-size:13px;color:var(--or);line-height:1.7;}
+.ai-eg{background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.2);border-radius:10px;padding:10px 12px;margin:8px 0;font-size:12px;color:#C4B5FD;line-height:1.7;}
+.ai-text{font-size:12px;color:#E0E7FF;line-height:1.9;}
+
+/* ══════════════ MINI CHATBOT ══════════════ */
+.mc-wrap{border:2px solid var(--or);border-radius:14px;overflow:hidden;margin:10px 0;}
+.mc-tog{background:linear-gradient(135deg,#2a1000,#4a2000);padding:11px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;}
+.mc-tog:hover{background:linear-gradient(135deg,#3a1800,#6a3000);}
+.mc-char{font-size:22px;animation:bounce 2s ease-in-out infinite alternate;}
+.mc-lbl{flex:1;}
+.mc-lbl-t{font-family:'Bangers',cursive;font-size:14px;color:var(--gd);letter-spacing:1px;}
+.mc-lbl-s{font-size:10px;color:#FED7AA;font-family:'Fredoka One',cursive;}
+.mc-arr{color:var(--gd);transition:transform .3s;}
+.mc-arr.open{transform:rotate(180deg);}
+.mc-body{display:none;background:#0d0920;}
+.mc-body.open{display:flex;flex-direction:column;}
+.mc-msgs{height:190px;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:7px;}
+.mc-msgs::-webkit-scrollbar{width:3px;}
+.mc-msgs::-webkit-scrollbar-thumb{background:var(--or);border-radius:3px;}
+.mm{display:flex;gap:6px;align-items:flex-end;max-width:88%;}
+.mm.u{align-self:flex-end;flex-direction:row-reverse;}
+.mav{font-size:16px;flex-shrink:0;}
+.mb{padding:7px 11px;border-radius:12px;font-size:11px;line-height:1.6;}
+.mm.b .mb{background:#1a1040;color:#E0E7FF;border-radius:0 12px 12px 12px;}
+.mm.u .mb{background:var(--or);color:#fff;border-radius:12px 0 12px 12px;}
+.mc-qq{display:flex;flex-wrap:wrap;gap:4px;padding:6px 10px;border-top:1px solid rgba(255,255,255,.05);}
+.mq{padding:3px 9px;background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.25);border-radius:9px;font-size:10px;color:#C4B5FD;cursor:pointer;font-family:'Fredoka One',cursive;transition:all .2s;}
+.mq:hover{background:var(--pu);color:#fff;}
+.mc-inp-row{display:flex;gap:5px;padding:7px 9px;border-top:1px solid rgba(255,255,255,.06);}
+.mc-inp{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:6px 11px;color:#fff;font-size:11px;font-family:'Nunito',sans-serif;}
+.mc-inp:focus{outline:none;border-color:var(--or);}
+.mc-send{padding:6px 12px;background:var(--or);border:none;border-radius:14px;color:#fff;font-family:'Fredoka One',cursive;font-size:11px;cursor:pointer;}
+
+/* ══════════════ SEQUENCES ══════════════ */
+.seq-tabs{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px;}
+.stab{padding:6px 11px;border-radius:13px;font-family:'Fredoka One',cursive;font-size:11px;cursor:pointer;border:2px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:rgba(255,255,255,.55);transition:all .2s;}
+.stab:hover,.stab.on{border-color:var(--gd);background:var(--gd);color:#000;}
+.sbox{background:var(--card);border-radius:14px;padding:14px;}
+.sterms{font-family:'Bangers',cursive;font-size:20px;color:var(--gd);letter-spacing:2px;margin-bottom:6px;}
+.sdot{border-radius:50%;display:inline-block;}
+
+/* ══════════════ ANIMATION STUDIO ══════════════ */
+.stabs2{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px;}
+.stab2{padding:7px 13px;border-radius:12px;font-family:'Fredoka One',cursive;font-size:11px;cursor:pointer;border:2px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#fff;transition:all .2s;}
+.stab2.on{background:var(--pu);border-color:var(--pu);}
+.cw{background:#050d1e;border-radius:14px;padding:12px;text-align:center;margin-bottom:8px;}
+canvas.mc2{border-radius:8px;max-width:100%;}
+.ctrl-row{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-top:8px;}
+.ctrl-btn{padding:7px 16px;border-radius:12px;font-family:'Fredoka One',cursive;font-size:12px;cursor:pointer;border:2px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:#fff;transition:all .2s;}
+.ctrl-btn:hover,.ctrl-btn.active{background:var(--or);border-color:var(--or);}
+
+/* ══════════════ COMIC ══════════════ */
+.comic-wrap{border:3px solid var(--or);border-radius:18px;overflow:hidden;margin-bottom:14px;}
+.comic-hdr{background:var(--or);padding:8px 14px;font-family:'Bangers',cursive;font-size:14px;letter-spacing:2px;text-align:center;}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--or);}
+.cp{background:var(--bg);padding:13px;min-height:130px;display:flex;flex-direction:column;justify-content:space-between;position:relative;}
+.cp.w{grid-column:span 2;}
+.cpn{font-family:'Bangers',cursive;font-size:9px;position:absolute;top:4px;right:6px;opacity:.2;color:var(--gd);}
+.cpch{font-size:26px;margin-bottom:4px;}
+.bub{border-radius:10px 10px 10px 2px;padding:7px 10px;font-size:11px;font-weight:700;max-width:95%;margin-top:4px;}
+.bub.r{border-radius:10px 10px 2px 10px;margin-left:auto;}
+.psfx{font-family:'Bangers',cursive;font-size:24px;letter-spacing:3px;text-align:center;}
+
+/* ══════════════ LEVEL SELECTOR (in practice/quiz) ══════════════ */
+.level-selector{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+.ls-btn{padding:10px 16px;border-radius:14px;font-family:'Fredoka One',cursive;font-size:12px;cursor:pointer;border:2px solid rgba(255,255,255,.15);background:rgba(255,255,255,.05);color:rgba(255,255,255,.6);transition:all .2s;flex:1;min-width:120px;text-align:center;}
+.ls-btn:hover{transform:scale(1.03);}
+.ls-btn.on[data-mode="school"]{background:rgba(14,160,86,.2);border-color:var(--school);color:#6EE7B7;}
+.ls-btn.on[data-mode="imo"]{background:rgba(255,153,51,.2);border-color:var(--or);color:#FCD34D;}
+.ls-btn.on[data-mode="national"]{background:rgba(239,68,68,.2);border-color:var(--rd);color:#FCA5A5;}
+.ls-btn.on[data-mode="global"]{background:rgba(124,58,237,.2);border-color:var(--pu);color:#C4B5FD;}
+.ls-em{font-size:20px;display:block;margin-bottom:3px;}
+.ls-name{font-size:13px;font-weight:700;}
+.ls-desc{font-size:10px;opacity:.7;margin-top:2px;}
+
+/* ══════════════ QUIZ GAME ══════════════ */
+.ghud{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:6px;}
+.gchip{background:rgba(255,153,51,.12);border:2px solid var(--or);border-radius:14px;padding:5px 12px;font-family:'Fredoka One',cursive;font-size:13px;color:var(--or);}
+.glives{font-size:16px;letter-spacing:2px;}
+.qcard{background:var(--card);border-radius:16px;padding:17px;margin-bottom:10px;}
+.qchar{text-align:center;font-size:36px;margin-bottom:6px;}
+.qtext{font-family:'Fredoka One',cursive;font-size:15px;text-align:center;margin-bottom:14px;color:#fff;}
+.ogrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.opt{padding:11px;border-radius:11px;font-family:'Fredoka One',cursive;font-size:13px;cursor:pointer;border:2px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#fff;transition:all .2s;text-align:center;}
+.opt:hover:not(:disabled){border-color:var(--gd);background:rgba(255,215,0,.07);}
+.opt.rr{background:#064e3b;border-color:#10b981;animation:pop .3s;}
+.opt.ww{background:#450a0a;border-color:#ef4444;text-decoration:line-through;opacity:.7;}
+.opt.sr{background:#064e3b;border-color:#10b981;}
+.opt.sr::after{content:'✓';font-size:11px;margin-left:5px;color:#6EE7B7;}
+@keyframes pop{0%{transform:scale(.85)}60%{transform:scale(1.08)}100%{transform:scale(1)}}
+.sol-box{border-radius:12px;padding:14px;margin:10px 0;border:2px dashed;}
+.sol-box.ok{background:#021c0f;border-color:#10b981;}
+.sol-box.ng{background:#1a0a1e;border-color:var(--or);}
+.sol-hd{font-family:'Bangers',cursive;font-size:15px;margin-bottom:6px;}
+.sol-ans{background:rgba(255,215,0,.1);border:2px solid var(--gd);border-radius:8px;padding:8px 12px;font-family:'Fredoka One',cursive;font-size:14px;color:var(--gd);text-align:center;margin:6px 0;}
+.sol-exp{font-size:12px;color:#C4B5FD;line-height:1.8;}
+.sol-bb{display:flex;gap:7px;margin-top:8px;background:rgba(255,153,51,.07);border-radius:8px;padding:8px;}
+.nxtQ{display:none;margin:8px auto;padding:10px 24px;background:var(--gr);border:none;border-radius:15px;color:#fff;font-family:'Bangers',cursive;font-size:16px;cursor:pointer;}
+.xpw{background:rgba(255,255,255,.08);border-radius:7px;height:7px;margin-top:8px;overflow:hidden;}
+.xpf{height:100%;background:var(--or);border-radius:7px;transition:width .5s;}
+.go-card{background:var(--card);border-radius:18px;padding:26px;text-align:center;}
+.go-em{font-size:54px;display:block;margin-bottom:6px;}
+.go-sc{font-family:'Bangers',cursive;font-size:58px;color:var(--gd);}
+
+/* ══════════════ PRACTICE ══════════════ */
+.prac-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;}
+.ptab{padding:8px 13px;border-radius:13px;font-family:'Fredoka One',cursive;font-size:11px;cursor:pointer;border:2px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:rgba(255,255,255,.55);transition:all .2s;}
+.ptab:hover,.ptab.on{background:var(--or);border-color:var(--or);color:#fff;}
+.pset{display:none;}
+.pset.on{display:block;}
+.pset-hdr{background:linear-gradient(135deg,#1a0533,#0d1f44);border-radius:14px;padding:14px;margin-bottom:12px;display:flex;align-items:center;gap:10px;border:1px solid rgba(255,215,0,.15);}
+.pset-icon{font-size:28px;}
+.pset-title{font-family:'Bangers',cursive;font-size:17px;color:var(--gd);letter-spacing:1px;}
+.pset-desc{font-size:11px;color:#C4B5FD;}
+
+/* MCQ */
+.mcq-item{background:var(--card);border-radius:12px;padding:14px;margin-bottom:10px;}
+.mcq-q{font-size:13px;font-weight:700;color:#fff;margin-bottom:10px;line-height:1.6;}
+.mcq-opts{display:flex;flex-direction:column;gap:6px;}
+.mopt{padding:8px 12px;border-radius:9px;font-size:12px;cursor:pointer;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:#A5B4FC;transition:all .2s;text-align:left;font-family:'Nunito',sans-serif;}
+.mopt:hover:not(.lk){border-color:var(--gd);background:rgba(255,215,0,.06);}
+.mopt.pr{background:#022c1a;border-color:#10b981;color:#6EE7B7;}
+.mopt.pw{background:#2a0808;border-color:#ef4444;color:#FCA5A5;text-decoration:line-through;}
+.mopt.rv{background:#022c1a;border-color:#10b981;color:#6EE7B7;}
+.msol{background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.25);border-radius:9px;padding:10px 12px;margin-top:8px;font-size:12px;color:#C4B5FD;line-height:1.7;display:none;}
+.msol.open{display:block;}
+.msol strong{color:var(--gd);}
+
+/* TRUE/FALSE */
+.tf-item{background:var(--card);border-radius:12px;padding:14px;margin-bottom:10px;}
+.tf-stmt{font-size:13px;color:#E0E7FF;line-height:1.7;margin-bottom:10px;}
+.tf-btns{display:flex;gap:8px;}
+.tfb{flex:1;padding:9px;border-radius:9px;font-family:'Bangers',cursive;font-size:15px;cursor:pointer;border:2px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);color:#fff;letter-spacing:1px;transition:all .2s;}
+.tfb:hover:not(.lk){transform:scale(1.03);}
+.tfb.tb{border-color:#10b981;}
+.tfb.fb{border-color:#ef4444;}
+.tfb.tr{background:#064e3b;border-color:#10b981;}
+.tfb.tw{background:#450a0a;border-color:#ef4444;}
+.tfsol{font-size:12px;color:#A5B4FC;margin-top:8px;padding:8px 10px;background:rgba(255,255,255,.04);border-radius:8px;display:none;line-height:1.6;}
+.tfsol.open{display:block;}
+
+/* SHORT/LONG */
+.ql-item{background:var(--card);border-radius:12px;padding:14px;margin-bottom:10px;border-left:3px solid var(--tl);}
+.ql-marks{font-family:'Fredoka One',cursive;font-size:10px;color:var(--gd);margin-bottom:5px;}
+.ql-q{font-size:13px;color:#E0E7FF;line-height:1.6;margin-bottom:7px;font-weight:700;}
+.ql-inp{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:7px 11px;color:#fff;font-size:12px;font-family:'Nunito',sans-serif;resize:vertical;min-height:56px;}
+.ql-inp:focus{outline:none;border-color:var(--tl);}
+.sol-tog{margin-top:7px;padding:5px 13px;background:rgba(8,145,178,.12);border:1px solid var(--tl);border-radius:9px;font-family:'Fredoka One',cursive;font-size:11px;color:var(--tl);cursor:pointer;transition:all .2s;}
+.sol-tog:hover{background:var(--tl);color:#fff;}
+.ql-sol{background:rgba(8,145,178,.07);border:1px solid rgba(8,145,178,.18);border-radius:9px;padding:10px 12px;margin-top:6px;font-size:12px;color:#A5B4FC;line-height:1.7;display:none;}
+.ql-sol.open{display:block;}
+.ql-sol strong{color:var(--gd);}
+
+/* CASE BASED */
+.case-wrap{background:var(--card);border-radius:14px;padding:16px;margin-bottom:12px;border:2px solid rgba(255,153,51,.25);}
+.case-story{background:linear-gradient(135deg,#1a0533,#0d1f44);border-radius:10px;padding:12px;margin-bottom:12px;font-size:12px;color:#C4B5FD;line-height:1.8;border-left:3px solid var(--or);}
+.case-story strong{color:var(--or);}
+
+/* ══════════════ OLYMPIAD ══════════════ */
+.comp-hdr{background:linear-gradient(135deg,#1a1000,#332000);border:2px solid var(--gd);border-radius:16px;padding:16px;margin-bottom:14px;text-align:center;}
+.comp-title{font-family:'Bangers',cursive;font-size:22px;color:var(--gd);letter-spacing:2px;}
+.comp-sub{font-size:11px;color:#FDE68A;margin-top:4px;}
+.comp-badges{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-top:10px;}
+.cbg{background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.3);border-radius:16px;padding:3px 10px;font-family:'Fredoka One',cursive;font-size:10px;color:var(--gd);}
+.comp-level{background:var(--card);border-radius:14px;padding:14px;margin-bottom:12px;border-left:4px solid var(--gd);}
+.clvl-title{font-family:'Bangers',cursive;font-size:15px;color:var(--gd);letter-spacing:1px;margin-bottom:10px;display:flex;align-items:center;gap:6px;}
+.diff{display:inline-block;padding:2px 7px;border-radius:8px;font-family:'Fredoka One',cursive;font-size:9px;}
+.d-easy{background:rgba(16,185,129,.2);color:#6EE7B7;}
+.d-med{background:rgba(245,158,11,.2);color:#FCD34D;}
+.d-hard{background:rgba(239,68,68,.2);color:#FCA5A5;}
+.d-oly{background:rgba(124,58,237,.25);color:#C4B5FD;}
+.comp-q{background:var(--card3);border-radius:10px;padding:12px;margin-bottom:8px;border:1px solid rgba(255,215,0,.08);}
+.comp-qtext{font-size:13px;color:#fff;line-height:1.7;margin-bottom:8px;font-weight:700;}
+.comp-opts{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.copt{padding:8px 10px;border-radius:8px;font-size:12px;cursor:pointer;border:1px solid rgba(255,215,0,.12);background:rgba(255,215,0,.03);color:#FDE68A;transition:all .2s;}
+.copt:hover:not(.lk){border-color:var(--gd);background:rgba(255,215,0,.08);}
+.copt.cr{background:#022c1a;border-color:#10b981;color:#6EE7B7;}
+.copt.cw{background:#2a0808;border-color:#ef4444;color:#FCA5A5;text-decoration:line-through;}
+.copt.cs{background:#022c1a;border-color:#10b981;color:#6EE7B7;}
+.csol{background:rgba(255,215,0,.05);border:1px solid rgba(255,215,0,.18);border-radius:8px;padding:10px 12px;margin-top:7px;font-size:12px;color:#FDE68A;line-height:1.7;display:none;}
+.csol.open{display:block;}
+.csol strong{color:var(--gd);}
+
+/* ══════════════ VIDEOS ══════════════ */
+.vc{background:var(--card);border-radius:14px;overflow:hidden;margin-bottom:12px;border:1px solid rgba(255,153,51,.18);}
+.vt{aspect-ratio:16/9;background:#050d1e;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;}
+.vp{width:50px;height:50px;background:#ff0000;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.vlbl{background:rgba(0,0,0,.7);color:var(--gd);font-family:'Fredoka One',cursive;font-size:10px;padding:3px 8px;border-radius:5px;position:absolute;top:7px;left:7px;}
+.vb{padding:11px;}
+.vtitle{font-family:'Fredoka One',cursive;font-size:13px;margin-bottom:3px;}
+.vdesc{font-size:11px;color:#818CF8;margin-bottom:7px;}
+.vbtn{display:inline-block;background:var(--or);color:#fff;padding:5px 13px;border-radius:10px;font-size:11px;font-weight:700;text-decoration:none;font-family:'Fredoka One',cursive;}
+
+/* ══════════════ FULL CHAT ══════════════ */
+.chat-wrap{background:var(--card);border-radius:14px;overflow:hidden;border:1px solid rgba(255,153,51,.18);}
+.chat-hdr{background:linear-gradient(135deg,var(--or),#c0621a);padding:10px 13px;display:flex;align-items:center;gap:8px;}
+.chat-msgs{height:280px;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;}
+.chat-msgs::-webkit-scrollbar{width:3px;}
+.chat-msgs::-webkit-scrollbar-thumb{background:var(--or);border-radius:3px;}
+.cmsg{display:flex;gap:7px;align-items:flex-end;max-width:85%;}
+.cmsg.u{align-self:flex-end;flex-direction:row-reverse;}
+.cav{font-size:18px;flex-shrink:0;}
+.cbub{padding:9px 12px;border-radius:14px;font-size:12px;line-height:1.6;}
+.cmsg.b .cbub{background:var(--card2);color:#E0E7FF;border-radius:0 14px 14px 14px;}
+.cmsg.u .cbub{background:var(--or);color:#fff;border-radius:14px 0 14px 14px;}
+.td{display:flex;gap:3px;align-items:center;padding:10px 12px;background:var(--card2);border-radius:0 14px 14px 14px;}
+.tdd{width:7px;height:7px;background:#818CF8;border-radius:50%;animation:ld 1.2s infinite;}
+.tdd:nth-child(2){animation-delay:.2s}.tdd:nth-child(3){animation-delay:.4s}
+@keyframes ld{0%,80%,100%{transform:scale(.5);opacity:.4}40%{transform:scale(1);opacity:1}}
+.chat-topics{display:flex;flex-wrap:wrap;gap:4px;padding:7px 11px;border-top:1px solid rgba(255,255,255,.05);}
+.ctop{padding:4px 10px;background:rgba(255,153,51,.08);border:1px solid rgba(255,153,51,.25);border-radius:10px;font-family:'Fredoka One',cursive;font-size:10px;color:#FED7AA;cursor:pointer;transition:all .2s;}
+.ctop:hover,.ctop.on{background:var(--or);color:#fff;}
+.chat-inp-row{display:flex;gap:6px;padding:8px 10px;border-top:1px solid rgba(255,255,255,.06);}
+.chat-inp{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:8px 12px;color:#fff;font-size:12px;font-family:'Nunito',sans-serif;}
+.chat-inp:focus{outline:none;border-color:var(--or);}
+.chat-send{padding:7px 14px;background:var(--or);border:none;border-radius:16px;color:#fff;font-family:'Fredoka One',cursive;font-size:11px;cursor:pointer;}
+
+/* ══════════════ MISSIONS ══════════════ */
+.tk-card{background:var(--card);border-radius:12px;padding:14px;margin-bottom:9px;border-left:4px solid var(--gr);}
+.tk-lbl{font-family:'Fredoka One',cursive;font-size:11px;color:var(--gr);margin-bottom:4px;}
+.tk-q{font-size:12px;color:#A5B4FC;line-height:1.7;margin-bottom:7px;}
+.tk-inp{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:7px;padding:7px 10px;color:#fff;font-size:12px;font-family:'Nunito',sans-serif;resize:none;}
+.tk-inp:focus{outline:none;border-color:var(--gr);}
+.prog-wrap{background:rgba(255,255,255,.07);border-radius:14px;height:9px;overflow:hidden;margin:6px 0;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--or),var(--gd));border-radius:14px;transition:width .5s;}
+
+/* ══════════════ UTILS ══════════════ */
+.sec-hdr{display:flex;align-items:center;gap:9px;margin-bottom:14px;}
+.sec-em{font-size:24px;}
+.sec-ttl{font-family:'Bangers',cursive;font-size:19px;letter-spacing:2px;color:var(--gd);}
+.badge{background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.25);border-radius:14px;padding:3px 9px;font-family:'Fredoka One',cursive;font-size:10px;color:var(--gd);}
+.divider{height:1px;background:rgba(255,255,255,.05);margin:12px 0;}
+.sbtn{padding:10px 24px;background:var(--or);border:none;border-radius:13px;color:#fff;font-family:'Bangers',cursive;font-size:16px;cursor:pointer;letter-spacing:1px;}
+.sbtn:hover{background:#c0621a;}
+.pbtn{background:var(--pu);}
+.pbtn:hover{background:#5b21b6;}
+.patrow{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:8px;cursor:pointer;transition:background .2s;font-family:'Fredoka One',cursive;font-size:14px;}
+.patrow:hover{background:rgba(255,255,255,.04);}
+.peq{color:#818CF8;flex:1;}.pans{color:var(--gd);min-width:64px;text-align:right;}.phnt{font-size:11px;color:#6EE7B7;margin-left:5px;}
+</style>
+
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="sp-bg" id="spBg"></div>
+  <div class="sp-body">
+    <span class="sp-char">🦸</span>
+    <div class="sp-title">BHEEM'S ULTIMATE MATH WORLD</div>
+    <div class="sp-sub">Class 6 • Chapter 1: Patterns in Mathematics • For ALL Students!</div>
+    <div class="sp-card">
+      <div>
+        <div class="sp-label">🌟 Your Name, Math Explorer!</div>
+        <input id="spName" type="text" placeholder="Type your name…" maxlength="22" autocomplete="off" style="margin-top:6px;"/>
+      </div>
+      <div class="level-pick">
+        <div class="lp-label">📚 Choose Your Level — You can change this anytime!</div>
+        <div class="lp-grid">
+          <div class="lp-btn sel" data-l="school" onclick="pickLevel('school',this)">
+            <span class="lp-em">🏫</span>
+            <div class="lp-name" style="color:var(--school);">School</div>
+            <div class="lp-desc">Class 6 NCERT · Easy fun learning</div>
+          </div>
+          <div class="lp-btn" data-l="imo" onclick="pickLevel('imo',this)">
+            <span class="lp-em">🥇</span>
+            <div class="lp-name" style="color:var(--or);">IMO / SOF</div>
+            <div class="lp-desc">Olympiad · Competition level</div>
+          </div>
+          <div class="lp-btn" data-l="national" onclick="pickLevel('national',this)">
+            <span class="lp-em">🏆</span>
+            <div class="lp-name" style="color:var(--rd);">NTSE / State</div>
+            <div class="lp-desc">Advanced · State competitions</div>
+          </div>
+          <div class="lp-btn" data-l="global" onclick="pickLevel('global',this)">
+            <span class="lp-em">🌍</span>
+            <div class="lp-name" style="color:var(--pu);">International</div>
+            <div class="lp-desc">IMO World · Research level</div>
+          </div>
+        </div>
+      </div>
+      <button class="sp-start" onclick="startApp()">🚀 Start Bheem's Math Adventure!</button>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none;">
+  <div class="topbar">
+    <div class="tb-char">🦸</div>
+    <div class="tb-title">BHEEM'S MATH WORLD</div>
+    <div class="tb-level" id="tbLevel" onclick="changeLevelQuick()" style="border:1px solid;border-radius:10px;padding:3px 9px;cursor:pointer;">🏫 School</div>
+    <div class="tb-stars">⭐<span id="starCount">0</span></div>
+    <div class="tb-name" id="tbName" onclick="changeName()">Hero ✎</div>
+  </div>
+  <div class="nav">
+    <button class="nb on"  onclick="showSec('learn',this)">📖 Learn</button>
+    <button class="nb"     onclick="showSec('seq',this)">🔢 Sequences</button>
+    <button class="nb"     onclick="showSec('anim',this)">✨ Animate</button>
+    <button class="nb"     onclick="showSec('comic',this)">💥 Comic</button>
+    <button class="nb"     onclick="showSec('quiz',this)">🎮 Quiz</button>
+    <button class="nb"     onclick="showSec('videos',this)">▶️ Videos</button>
+    <button class="nb"     onclick="showSec('chat',this)">🤖 Ask Bheem</button>
+    <button class="nb"     onclick="showSec('practice',this)">📚 Practice</button>
+    <button class="nb"     onclick="showSec('compete',this)">🏆 Olympiad</button>
+    <button class="nb"     onclick="showSec('missions',this)">📝 Missions</button>
+  </div>
+
+  <!-- ════════ LEARN ════════ -->
+  <div id="learn" class="sec on">
+    <div class="hero-banner">
+      <div class="hero-content">
+        <div class="hero-chars"><span>🦸</span><span>🐘</span><span>🌸</span><span>🦁</span></div>
+        <div class="hero-title">Chapter 1 — Patterns in Mathematics</div>
+        <div class="hero-sub">Ganita Prakash • Grade 6 • "Math is everywhere — even in Bheem's laddoos! 🍬"</div>
+      </div>
+    </div>
+
+    <!-- CHAPTER SUMMARY -->
+    <div class="sum-card">
+      <div class="sum-hdr"><div class="sum-icon">📋</div><div><div class="sum-title">Chapter Summary — Read This First!</div><div style="font-size:11px;color:#C4B5FD;">A quick overview of everything you'll learn in Chapter 1</div></div></div>
+      <div class="sum-pts">
+        <div class="sum-pt"><div class="sum-dot"></div><span><strong>Mathematics</strong> = searching for patterns + explaining WHY they exist. Found in nature, stars, cooking, games — everywhere!</span></div>
+        <div class="sum-pt"><div class="sum-dot"></div><span><strong>10 key number sequences:</strong> Counting, Odd, Even, Triangular, Squares, Cubes, Virahānka, Powers of 2, Powers of 3, All 1s</span></div>
+        <div class="sum-pt"><div class="sum-dot"></div><span><strong>Magic pattern:</strong> Sum of first n odd numbers ALWAYS = n² (e.g. 1+3+5+7+9 = 25 = 5²)</span></div>
+        <div class="sum-pt"><div class="sum-dot"></div><span><strong>Shape sequences:</strong> Regular Polygons, Complete Graphs Kn, Stacked Squares/Triangles, Koch Snowflake fractal</span></div>
+        <div class="sum-pt"><div class="sum-dot"></div><span><strong>Geometry</strong> = shape patterns study. <strong>Number Theory</strong> = whole number patterns study</span></div>
+        <div class="sum-pt"><div class="sum-dot"></div><span><strong>Koch Snowflake:</strong> 3 → 12 → 48 → 192 segments (3 × powers of 4). Infinite perimeter, finite area!</span></div>
+      </div>
+      <div class="kw-row"><div class="kw">Pattern</div><div class="kw">Sequence</div><div class="kw">Number Theory</div><div class="kw">Geometry</div><div class="kw">Triangular Numbers</div><div class="kw">Square Numbers</div><div class="kw">Cube Numbers</div><div class="kw">Virahānka</div><div class="kw">Koch Snowflake</div><div class="kw">Regular Polygon</div><div class="kw">Complete Graph</div></div>
+    </div>
+
+    <!-- TOPIC 1.1 -->
+    <div class="tc" id="tc1">
+      <div class="tc-num">TOPIC 1.1</div>
+      <div class="tc-title">What is Mathematics?</div>
+      <div class="tc-body">Mathematics is, in large part, the <strong>search for patterns</strong> and the explanations for why those patterns exist. Such patterns exist all around us — in nature, in our homes and schools, in the motion of sun, moon, and stars.<br><br>The search for patterns can be a <strong>fun and creative endeavour</strong>. Mathematicians think of mathematics both as an <em style="color:var(--or)">art</em> and as a <em style="color:#6EE7B7">science</em>. Math doesn't just find patterns — it <strong>explains WHY</strong> they exist!</div>
+      <div class="fbox">🦸 BHEEM'S FORMULA: Mathematics = Pattern Discovery + Explanation = Art + Science!</div>
+      <div class="btip"><span style="font-size:20px;">🦸</span><span>Bheem says: "When I count my laddoos — 1, 2, 3, 4 — that's a pattern! When Chutki arranges flowers in rows — also a pattern! Even when I run to Dholakpur, I follow a path pattern. <strong>Math is everywhere!</strong> 🍬"</span></div>
+
+      <!-- SOLVED EXAMPLE 1.1 -->
+      <div class="ex-box solved">
+        <div class="ex-tag" style="color:var(--tl);">📘 Solved Example 1 — Find a pattern around you</div>
+        <div class="ex-q">Q: Bheem sees tiles on the floor: 1, 4, 9, 16, 25... Is there a pattern? What is it?</div>
+        <div class="ex-steps">
+          <div class="ex-step"><div class="ex-step-n">1</div><span>Look at differences: 4-1=3, 9-4=5, 16-9=7, 25-16=9... differences are 3,5,7,9 (odd numbers!)</span></div>
+          <div class="ex-step"><div class="ex-step-n">2</div><span>Notice: 1=1², 4=2², 9=3², 16=4², 25=5². These are SQUARE numbers!</span></div>
+          <div class="ex-step"><div class="ex-step-n">3</div><span>The rule: each term = n² where n = position of the term</span></div>
+        </div>
+        <div class="ex-ans">✓ Yes! It's the square number sequence. Next term = 6² = 36</div>
+      </div>
+
+      <!-- SOLVED EXAMPLE 2 -->
+      <div class="ex-box solved">
+        <div class="ex-tag" style="color:var(--tl);">📘 Solved Example 2 — Real life pattern</div>
+        <div class="ex-q">Q: Chutki arranges dots in rows: Row 1 has 1 dot, Row 2 has 3, Row 3 has 5, Row 4 has 7. What type of pattern is this? What's in Row 10?</div>
+        <div class="ex-steps">
+          <div class="ex-step"><div class="ex-step-n">1</div><span>The sequence is: 1, 3, 5, 7, 9... — these are ODD numbers!</span></div>
+          <div class="ex-step"><div class="ex-step-n">2</div><span>Rule: nth term = 2n - 1</span></div>
+          <div class="ex-step"><div class="ex-step-n">3</div><span>Row 10 = 2(10) - 1 = 20 - 1 = 19 dots</span></div>
+        </div>
+        <div class="ex-ans">✓ Odd number pattern! Row 10 = 19 dots</div>
+      </div>
+
+      <!-- PRACTICE EXAMPLES -->
+      <div class="ex-box practice">
+        <div class="ex-tag" style="color:var(--school);">✏️ Practice Example 1 — Try It Yourself!</div>
+        <div class="ex-q">Q: Find the next 3 terms and the pattern rule: 2, 6, 12, 20, 30, __, __, __</div>
+        <textarea class="prac-inp" rows="2" placeholder="Write your answer and reasoning here…"></textarea>
+        <button class="show-sol-btn" onclick="toggleSol(this)">👁️ Show Solution</button>
+        <div class="prac-sol">
+          <strong>Solution:</strong><br>
+          Differences: 4, 6, 8, 10, 12 → differences increase by 2 each time!<br>
+          Next differences: 12, 14, 16<br>
+          So: 30+12=<strong>42</strong>, 42+14=<strong>56</strong>, 56+16=<strong>72</strong><br>
+          Pattern rule: n(n+1) — i.e. 1×2, 2×3, 3×4, 4×5... These are <strong>oblong numbers!</strong>
+        </div>
+      </div>
+
+      <div class="ex-box practice">
+        <div class="ex-tag" style="color:var(--school);">✏️ Practice Example 2 — Try It Yourself!</div>
+        <div class="ex-q">Q: Bheem sees a sequence: 1, 1, 1, 1, 1... and another: 0, 2, 4, 6, 8... Name both sequences and write their rules.</div>
+        <textarea class="prac-inp" rows="2" placeholder="Write your answer here…"></textarea>
+        <button class="show-sol-btn" onclick="toggleSol(this)">👁️ Show Solution</button>
+        <div class="prac-sol">
+          <strong>Sequence 1:</strong> All 1s — Rule: aₙ = 1 (every term is always 1!)<br>
+          <strong>Sequence 2:</strong> Even numbers (starting from 0) — Rule: aₙ = 2(n-1) or just 0, 2, 4, 6...<br>
+          Even numbers are all divisible by 2. Formula: aₙ = 2n-2 for n = 1, 2, 3...
+        </div>
+      </div>
+
+      <div class="ai-help-row">
+        <button class="ai-help-btn" onclick="toggleAI('ai1')">🤖 <span><strong>Still confused? Let Bheem explain it differently!</strong> — Choose your explanation level</span> <span>▼</span></button>
+        <div class="ai-panel" id="ai1">
+          <div class="ai-panel-hdr"><span style="font-size:18px;">🤖</span><span class="ai-panel-title">Bheem's Personal Explanation</span></div>
+          <div class="ai-level-tabs"><div class="alt on" onclick="setAILevel('ai1',0,this)">🍬 Super Easy (Class 4-5 level)</div><div class="alt" onclick="setAILevel('ai1',1,this)">📚 Normal (Class 6)</div><div class="alt" onclick="setAILevel('ai1',2,this)">🔬 Advanced (IMO prep)</div></div>
+          <div class="ai-content" id="ai1c">
+            <div class="ai-vis">🍬 Imagine you have laddoos! You arrange them: 1 laddoo, then 4 laddoos (2×2 square), then 9 laddoos (3×3 square)... Notice something? They make PERFECT SQUARES! That's a pattern! Math is just noticing these amazing arrangements!</div>
+            <div class="ai-eg">🌟 Real life: Calendar dates follow patterns! Staircase steps follow patterns! Your heartbeat follows a pattern (about 72 beats per minute)! Mathematics helps us find and USE these patterns!</div>
+          </div>
+        </div>
+      </div>
+      <div id="mc-t1"></div>
+    </div>
+
+    <!-- TOPIC 1.2 -->
+    <div class="tc" id="tc2" style="border-left-color:var(--gr);">
+      <div class="tc-num">TOPIC 1.2</div>
+      <div class="tc-title">Patterns in Numbers — Number Sequences</div>
+      <div class="tc-body">The branch of Mathematics studying patterns in <strong>whole numbers</strong> (0,1,2,3,4...) is called <strong style="color:var(--gd)">Number Theory</strong>.<br><br>A <strong>number sequence</strong> is a list of numbers that follow a specific rule. There are 10 key sequences in this chapter — each with its own personality and magic!</div>
+      <div class="fbox">🔢 10 Key Sequences: All 1s • Counting • Odd • Even • Triangular • Squares • Cubes • Virahānka • Powers of 2 • Powers of 3</div>
+      <div class="btip"><span style="font-size:20px;">🐘</span><span>Jumbo says: "I count my bananas in triangles: 1 in row 1, 2 in row 2, 3 in row 3... Total = 1, 3, 6, 10, 15... These form TRIANGULAR shapes! That's why they're called <strong>triangular numbers!</strong>"</span></div>
+
+      <!-- PATTERN REVEAL BOX (interactive) -->
+      <div style="background:#0a0820;border-radius:12px;padding:14px;margin:10px 0;">
+        <div style="font-family:'Fredoka One',cursive;font-size:13px;color:var(--gd);margin-bottom:8px;">🎯 Click each row to discover the magic pattern!</div>
+        <div id="patReveal"></div>
+      </div>
+
+      <!-- SOLVED EXAMPLES -->
+      <div class="ex-box solved">
+        <div class="ex-tag" style="color:var(--tl);">📘 Solved Example 1 — Identify the sequence</div>
+        <div class="ex-q">Q: Write the first 6 terms of triangular numbers. Find a formula for the nth term.</div>
+        <div class="ex-steps">
+          <div class="ex-step"><div class="ex-step-n">1</div><span>Draw dots in triangle rows: Row 1: 1, Row 2: 1+2=3, Row 3: 1+2+3=6, Row 4: 1+2+3+4=10...</span></div>
+          <div class="ex-step"><div class="ex-step-n">2</div><span>Sequence: 1, 3, 6, 10, 15, 21</span></div>
+          <div class="ex-step"><div class="ex-step-n">3</div><span>Formula: Tₙ = n(n+1)/2 &nbsp;→&nbsp; T₆ = 6×7/2 = 21 ✓</span></div>
+        </div>
+        <div class="ex-ans">✓ Triangular numbers: 1, 3, 6, 10, 15, 21 | Formula: Tₙ = n(n+1)/2</div>
+      </div>
+
+      <div class="ex-box solved">
+        <div class="ex-tag" style="color:var(--tl);">📘 Solved Example 2 — Virahānka sequence</div>
+        <div class="ex-q">Q: Write the Virahānka sequence up to 10 terms. What is the 12th term? (Given: T₁₀=55, T₁₁=89)</div>
+        <div class="ex-steps">
+          <div class="ex-step"><div class="ex-step-n">1</div><span>Rule: each term = sum of TWO terms before it</span></div>
+          <div class="ex-step"><div class="ex-step-n">2</div><span>1, 2, 3, 5, 8, 13, 21, 34, 55, 89 (first 10 terms)</span></div>
+          <div class="ex-step"><div class="ex-step-n">3</div><span>T₁₁ = T₁₀ + T₉ = 89 + 55 = 144... wait — T₁₂ = T₁₁ + T₁₀ = 144 + 89 = 233... Actually T₁₁=89, so T₁₂ = 89 + 55 = wait — recount: T₁₀=55, T₁₁=89, T₁₂ = 55+89 = 144</span></div>
+        </div>
+        <div class="ex-ans">✓ 10 terms: 1,2,3,5,8,13,21,34,55,89 | T₁₂ = 144</div>
+      </div>
+
+      <div class="ex-box practice">
+        <div class="ex-tag" style="color:var(--school);">✏️ Practice Example 1</div>
+        <div class="ex-q">Q: Find the 10th triangular number. Is it also a square number? Explain.</div>
+        <textarea class="prac-inp" rows="2" placeholder="Your answer…"></textarea>
+        <button class="show-sol-btn" onclick="toggleSol(this)">👁️ Show Solution</button>
+        <div class="prac-sol"><strong>T₁₀ = 10 × 11 / 2 = 55</strong><br>Is 55 a perfect square? √55 ≈ 7.4, so NO — 55 is NOT a square number.<br>Note: Numbers that are BOTH triangular AND square are special! Examples: 1, 36, 1225. The next after 36 is 1225 = 35² = T₄₉!</div>
+      </div>
+
+      <div class="ex-box practice">
+        <div class="ex-tag" style="color:var(--school);">✏️ Practice Example 2</div>
+        <div class="ex-q">Q: In Virahānka sequence 1,2,3,5,8,13,21... Chutki claims the 8th term is 34. Is she right? Find the 9th term.</div>
+        <textarea class="prac-inp" rows="2" placeholder="Your answer…"></textarea>
+        <button class="show-sol-btn" onclick="toggleSol(this)">👁️ Show Solution</button>
+        <div class="prac-sol"><strong>Let's count:</strong> T₁=1, T₂=2, T₃=3, T₄=5, T₅=8, T₆=13, T₇=21, T₈=34 ✓ <strong>Chutki is correct!</strong><br>T₉ = T₈ + T₇ = 34 + 21 = <strong>55</strong></div>
+      </div>
+
+      <div class="ai-help-row">
+        <button class="ai-help-btn" onclick="toggleAI('ai2')">🤖 <span><strong>I don't understand sequences — help me!</strong></span> <span>▼</span></button>
+        <div class="ai-panel" id="ai2">
+          <div class="ai-panel-hdr"><span style="font-size:18px;">🤖</span><span class="ai-panel-title">Bheem Explains Number Sequences</span></div>
+          <div class="ai-level-tabs"><div class="alt on" onclick="setAILevel('ai2',0,this)">🍬 Super Easy</div><div class="alt" onclick="setAILevel('ai2',1,this)">📚 Normal</div><div class="alt" onclick="setAILevel('ai2',2,this)">🔬 Advanced</div></div>
+          <div class="ai-content" id="ai2c">
+            <div class="ai-vis">🍌 Think of sequences as RECIPES! Triangular: "add 1 more banana each step" → 1, 3, 6, 10. Square: "arrange in square grids" → 1, 4, 9, 16. Virahānka: "always add the last TWO numbers" → 1, 2, 3, 5, 8...</div>
+            <div class="ai-eg">📝 Easy way to remember Virahānka: Cover last two numbers with fingers. The next = fingers added together! 8+13 = 21. 13+21 = 34. Simple!</div>
+          </div>
+        </div>
+      </div>
+      <div id="mc-t2"></div>
+    </div>
+
+    <!-- TOPIC 1.3 -->
+    <div class="tc" id="tc3" style="border-left-color:var(--pu);">
+      <div class="tc-num">TOPIC 1.3</div>
+      <div class="tc-title">Visualising Number Sequences with Pictures</div>
+      <div class="tc-body">Many number sequences can be <strong>visualised using dot pictures</strong>. Drawing helps you TRULY understand WHY sequences work the way they do!<br><br>• <strong>Square numbers</strong> (1,4,9,16) → form perfect square dot grids<br>• <strong>Triangular numbers</strong> (1,3,6,10) → form triangle dot shapes<br>• <strong>Cube numbers</strong> (1,8,27,64) → fill 3D cube shapes</div>
+      <div class="btip"><span style="font-size:20px;">🦁</span><span>Raju says: "I drew 9 dots in a 3×3 grid — PERFECT SQUARE! I drew 10 dots as a triangle — TRIANGULAR NUMBER! Seeing it made me understand instantly. <strong>Drawing = Understanding!</strong> Try it yourself in your notebook!"</span></div>
+
+      <div class="ex-box solved">
+        <div class="ex-tag" style="color:var(--tl);">📘 Solved Example 1 — Why is 36 special?</div>
+        <div class="ex-q">Q: Show that 36 is BOTH a triangular number AND a square number.</div>
+        <div class="ex-steps">
+          <div class="ex-step"><div class="ex-step-n">1</div><span><strong>As a square:</strong> 36 = 6 × 6 = 6² → arrange 36 dots in a 6×6 grid → perfect square! ✓</span></div>
+          <div class="ex-step"><div class="ex-step-n">2</div><span><strong>As a triangle:</strong> T₈ = 8×9/2 = 36 → arrange 36 dots in rows of 1,2,3,4,5,6,7,8 → perfect triangle! ✓</span></div>
+          <div class="ex-step"><div class="ex-step-n">3</div><span>36 is called a <strong>square triangular number</strong> — a very rare and special number!</span></div>
+        </div>
+        <div class="ex-ans">✓ 36 = 6² = T₈. It is both square AND triangular! Only 1, 36, 1225... have this property.</div>
+      </div>
+
+      <div class="ex-box solved">
+        <div class="ex-tag" style="color:var(--tl);">📘 Solved Example 2 — Hexagonal numbers</div>
+        <div class="ex-q">Q: The first 4 hexagonal numbers are 1, 7, 19, 37. What pattern do you see? Find the 5th term.</div>
+        <div class="ex-steps">
+          <div class="ex-step"><div class="ex-step-n">1</div><span>Differences: 7-1=6, 19-7=12, 37-19=18. Differences are 6, 12, 18... (multiples of 6!)</span></div>
+          <div class="ex-step"><div class="ex-step-n">2</div><span>Next difference = 24</span></div>
+          <div class="ex-step"><div class="ex-step-n">3</div><span>5th hexagonal number = 37 + 24 = 61</span></div>
+        </div>
+        <div class="ex-ans">✓ Differences are 6, 12, 18, 24... (add 6 each time). 5th hexagonal number = 61</div>
+      </div>
+
+      <div class="ex-box practice">
+        <div class="ex-tag" style="color:var(--school);">✏️ Practice Example 1</div>
+        <div class="ex-q">Q: Can you arrange 16 dots BOTH as a square AND as an oblong rectangle? What are the arrangements?</div>
+        <textarea class="prac-inp" rows="2" placeholder="Your answer…"></textarea>
+        <button class="show-sol-btn" onclick="toggleSol(this)">👁️ Show Solution</button>
+        <div class="prac-sol"><strong>As square:</strong> 4 × 4 = 16 dots in a 4×4 grid ✓<br><strong>As rectangle:</strong> 2×8 = 16, or 1×16 = 16 (also 8×2 etc.)<br>16 is a square number (4²) but NOT a triangular number (T₅=15, T₆=21 — no 16!)</div>
+      </div>
+
+      <div class="ex-box practice">
+        <div class="ex-tag" style="color:var(--school);">✏️ Practice Example 2</div>
+        <div class="ex-q">Q: Powers of 2: 1, 2, 4, 8, 16, 32... If you think of each term as a LINE (1D), SQUARE (2D), CUBE (3D) growing in dimensions — can you draw the first 4 terms pictorially?</div>
+        <textarea class="prac-inp" rows="2" placeholder="Describe your drawing here…"></textarea>
+        <button class="show-sol-btn" onclick="toggleSol(this)">👁️ Show Solution</button>
+        <div class="prac-sol"><strong>1 → single dot (0D)</strong><br><strong>2 → two connected dots (line segment, 1D)</strong><br><strong>4 → 4 corners of a square (2D)</strong><br><strong>8 → 8 corners of a cube (3D)</strong><br><strong>16 → 16 corners of a 4D hypercube!</strong> Each step adds a new dimension! 🤯</div>
+      </div>
+
+      <div class="ai-help-row">
+        <button class="ai-help-btn" onclick="toggleAI('ai3')">🤖 <span><strong>How do I draw these sequences? Show me!</strong></span> <span>▼</span></button>
+        <div class="ai-panel" id="ai3">
+          <div class="ai-panel-hdr"><span style="font-size:18px;">🤖</span><span class="ai-panel-title">Visual Method — Bheem Draws For You</span></div>
+          <div class="ai-level-tabs"><div class="alt on" onclick="setAILevel('ai3',0,this)">🍬 Super Easy</div><div class="alt" onclick="setAILevel('ai3',1,this)">📚 Normal</div><div class="alt" onclick="setAILevel('ai3',2,this)">🔬 Advanced</div></div>
+          <div class="ai-content" id="ai3c">
+            <div class="ai-vis">✏️ Draw 9 dots like this in your notebook:<br>● ● ●<br>● ● ●<br>● ● ●<br>Count = 9 = 3×3 = SQUARE NUMBER ✓<br><br>Now draw 6 dots as a triangle:<br>●<br>● ●<br>● ● ●<br>Count = 6 = TRIANGULAR NUMBER ✓<br><br>SEEING = UNDERSTANDING! That's why mathematicians ALWAYS draw pictures!</div>
+          </div>
+        </div>
+      </div>
+      <div id="mc-t3"></div>
+    </div>
+
+    <!-- TOPIC 1.4 -->
+    <div class="tc" id="tc4" style="border-left-color:var(--gd);">
+      <div class="tc-num">TOPIC 1.4</div>
+      <div class="tc-title">Relations Among Number Sequences</div>
+      <div class="tc-body">Sequences are connected to each other in <strong>surprising and beautiful ways</strong>! The most magical connection:<br><br>👉 <strong>Sum of first n odd numbers = n²</strong> (always!)<br>👉 Two consecutive triangular numbers always add to give a square number!<br>👉 Adding counting numbers up and down (1+2+3+2+1) also gives squares!</div>
+      <div class="btip"><span style="font-size:20px;">🦸</span><span>Bheem's WOW moment: "I was stacking laddoos in L-shapes on the floor. Each L-shape had an odd number of laddoos! When I put them together — PERFECT SQUARE! I discovered this myself! <strong>Every student can discover math!</strong> 🍬"</span></div>
+
+      <div class="ex-box solved">
+        <div class="ex-tag" style="color:var(--tl);">📘 Solved Example 1 — Odd numbers and squares</div>
+        <div class="ex-q">Q: Using the pattern, find the sum: 1+3+5+7+9+11+13+15+17+19</div>
+        <div class="ex-steps">
+          <div class="ex-step"><div class="ex-step-n">1</div><span>Count the odd numbers being added: 1, 3, 5, 7, 9, 11, 13, 15, 17, 19 → that's 10 odd numbers</span></div>
+          <div class="ex-step"><div class="ex-step-n">2</div><span>Rule: Sum of first n odd numbers = n²</span></div>
+          <div class="ex-step"><div class="ex-step-n">3</div><span>Here n = 10, so sum = 10² = 100</span></div>
+        </div>
+        <div class="ex-ans">✓ Sum = 10² = 100. (Verify: 1+3+5+7+9+11+13+15+17+19 = 100 ✓)</div>
+      </div>
+
+      <div class="ex-box solved">
+        <div class="ex-tag" style="color:var(--tl);">📘 Solved Example 2 — Triangular pairs give squares</div>
+        <div class="ex-q">Q: Show that T₅ + T₆ gives a perfect square. Also prove T₇ + T₈ gives a square.</div>
+        <div class="ex-steps">
+          <div class="ex-step"><div class="ex-step-n">1</div><span>T₅ = 15, T₆ = 21. Sum = 15 + 21 = 36 = 6² ✓</span></div>
+          <div class="ex-step"><div class="ex-step-n">2</div><span>T₇ = 28, T₈ = 36. Sum = 28 + 36 = 64 = 8² ✓</span></div>
+          <div class="ex-step"><div class="ex-step-n">3</div><span>General rule: Tₙ + Tₙ₊₁ = (n+1)² ALWAYS! Beautiful!</span></div>
+        </div>
+        <div class="ex-ans">✓ T₅+T₆ = 36 = 6², T₇+T₈ = 64 = 8². Rule: Tₙ+Tₙ₊₁ = (n+1)²</div>
+      </div>
+
+      <div class="ex-box practice">
+        <div class="ex-tag" style="color:var(--school);">✏️ Practice Example 1</div>
+        <div class="ex-q">Q: Without adding, find: 1+3+5+7+9+11+13+15+17+19+21+23+25</div>
+        <textarea class="prac-inp" rows="2" placeholder="Count the odd numbers first…"></textarea>
+        <button class="show-sol-btn" onclick="toggleSol(this)">👁️ Show Solution</button>
+        <div class="prac-sol"><strong>Count:</strong> 1,3,5,7,9,11,13,15,17,19,21,23,25 → 13 odd numbers!<br><strong>Sum = 13² = 169</strong><br>Check: The last odd number = 25 = 2(13)-1 ✓ So indeed 13 odd numbers.</div>
+      </div>
+
+      <div class="ex-box practice">
+        <div class="ex-tag" style="color:var(--school);">✏️ Practice Example 2</div>
+        <div class="ex-q">Q: Bheem says "Adding powers of 2: 1, 1+2, 1+2+4, 1+2+4+8 gives 1, 3, 7, 15... If I add 1 to each, I get 2, 4, 8, 16!" Is Bheem right? What pattern is this?</div>
+        <textarea class="prac-inp" rows="2" placeholder="Verify and explain…"></textarea>
+        <button class="show-sol-btn" onclick="toggleSol(this)">👁️ Show Solution</button>
+        <div class="prac-sol"><strong>Bheem is 100% RIGHT!</strong><br>1+1=2=2¹, 3+1=4=2², 7+1=8=2³, 15+1=16=2⁴<br>Rule: (1+2+4+...+2ⁿ⁻¹) + 1 = 2ⁿ<br>This means: sum of first n powers of 2 = 2ⁿ - 1<br>For n=10: 1+2+4+8+16+32+64+128+256+512 = 1023 = 2¹⁰-1 = 1024-1 ✓</div>
+      </div>
+
+      <div class="ai-help-row">
+        <button class="ai-help-btn" onclick="toggleAI('ai4')">🤖 <span><strong>I don't understand why odd numbers give squares!</strong></span> <span>▼</span></button>
+        <div class="ai-panel" id="ai4">
+          <div class="ai-panel-hdr"><span style="font-size:18px;">🤖</span><span class="ai-panel-title">The L-Shape Secret — Bheem Explains</span></div>
+          <div class="ai-level-tabs"><div class="alt on" onclick="setAILevel('ai4',0,this)">🍬 Super Easy</div><div class="alt" onclick="setAILevel('ai4',1,this)">📚 Normal</div><div class="alt" onclick="setAILevel('ai4',2,this)">🔬 Advanced (Proof)</div></div>
+          <div class="ai-content" id="ai4c">
+            <div class="ai-vis">🍬 Draw a 1×1 square → 1 dot (= 1)<br>Add an L-shape of 3 dots → 2×2 square (= 4)<br>Add an L-shape of 5 dots → 3×3 square (= 9)<br>Add an L-shape of 7 dots → 4×4 square (= 16)<br><br>Each L-shape IS an odd number! Stack them → PERFECT SQUARE every time! That's the PROOF!</div>
+            <div class="ai-eg">🎯 Short proof: n² − (n-1)² = n² − n² + 2n − 1 = 2n-1 = the nth odd number! So each square is previous square + odd number!</div>
+          </div>
+        </div>
+      </div>
+      <div id="mc-t4"></div>
+    </div>
+
+    <!-- TOPIC 1.5 -->
+    <div class="tc" id="tc5" style="border-left-color:var(--pk);">
+      <div class="tc-num">TOPIC 1.5</div>
+      <div class="tc-title">Patterns in Shapes — Geometry</div>
+      <div class="tc-body">Shape sequences are another major type of pattern! The branch studying these is <strong style="color:var(--gd)">Geometry</strong>.<br><br>Key shape sequences:<br>• <strong>Regular Polygons:</strong> Triangle(3) → Square(4) → Pentagon(5) → Hexagon(6) → ...<br>• <strong>Complete Graphs Kₙ:</strong> K2, K3, K4, K5... (every point connects to every other)<br>• <strong>Stacked Squares/Triangles:</strong> Growing grid patterns<br>• <strong>Koch Snowflake:</strong> A FRACTAL — infinite perimeter, finite area!</div>
+      <div class="fbox">🌸 Regular Polygon: n sides, n corners, interior angles sum = (n-2)×180°</div>
+      <div class="btip"><span style="font-size:20px;">🌸</span><span>Chutki says: "I count polygon sides: 3, 4, 5, 6, 7, 8, 9, 10... It's just COUNTING NUMBERS starting from 3! And sides = corners! So beautiful! The Koch Snowflake is like my rangoli pattern that goes on <strong>forever!</strong> 🎨"</span></div>
+
+      <div class="ex-box solved">
+        <div class="ex-tag" style="color:var(--tl);">📘 Solved Example 1 — Regular polygon angles</div>
+        <div class="ex-q">Q: What is the sum of interior angles of (a) a hexagon, (b) a decagon?</div>
+        <div class="ex-steps">
+          <div class="ex-step"><div class="ex-step-n">1</div><span>Formula: Sum of angles of n-sided polygon = (n-2) × 180°</span></div>
+          <div class="ex-step"><div class="ex-step-n">2</div><span>Hexagon: n=6 → (6-2)×180 = 4×180 = <strong>720°</strong></span></div>
+          <div class="ex-step"><div class="ex-step-n">3</div><span>Decagon: n=10 → (10-2)×180 = 8×180 = <strong>1440°</strong></span></div>
+        </div>
+        <div class="ex-ans">✓ Hexagon = 720° | Decagon = 1440°</div>
+      </div>
+
+      <div class="ex-box solved">
+        <div class="ex-tag" style="color:var(--tl);">📘 Solved Example 2 — Koch Snowflake pattern</div>
+        <div class="ex-q">Q: Koch Snowflake has 3 segments in step 0. Each segment becomes 4 in the next step. How many segments in step 4? Find the general formula.</div>
+        <div class="ex-steps">
+          <div class="ex-step"><div class="ex-step-n">1</div><span>Step 0: 3 segments | Step 1: 3×4=12 | Step 2: 12×4=48 | Step 3: 48×4=192</span></div>
+          <div class="ex-step"><div class="ex-step-n">2</div><span>Step 4: 192×4 = <strong>768 segments</strong></span></div>
+          <div class="ex-step"><div class="ex-step-n">3</div><span>General formula: Segments at step n = 3 × 4ⁿ</span></div>
+        </div>
+        <div class="ex-ans">✓ Step 4 = 768 segments | Formula: 3 × 4ⁿ</div>
+      </div>
+
+      <div class="ex-box practice">
+        <div class="ex-tag" style="color:var(--school);">✏️ Practice Example 1</div>
+        <div class="ex-q">Q: A regular polygon has each interior angle = 120°. How many sides does it have? What is it called?</div>
+        <textarea class="prac-inp" rows="2" placeholder="Use formula: each angle = (n-2)×180/n"></textarea>
+        <button class="show-sol-btn" onclick="toggleSol(this)">👁️ Show Solution</button>
+        <div class="prac-sol"><strong>Formula:</strong> Each angle of regular polygon = (n-2)×180 / n<br>Set equal to 120: (n-2)×180/n = 120<br>180n - 360 = 120n<br>60n = 360<br>n = 6 → <strong>HEXAGON!</strong><br>That's why honeycombs are hexagons — 120° angles tile perfectly! 🐝</div>
+      </div>
+
+      <div class="ex-box practice">
+        <div class="ex-tag" style="color:var(--school);">✏️ Practice Example 2</div>
+        <div class="ex-q">Q: Complete Graph K₆ — how many edges (lines) does it have? Which triangular number is this?</div>
+        <textarea class="prac-inp" rows="2" placeholder="Formula: Kₙ edges = n(n-1)/2"></textarea>
+        <button class="show-sol-btn" onclick="toggleSol(this)">👁️ Show Solution</button>
+        <div class="prac-sol"><strong>K₆ edges = 6×5/2 = 15</strong><br>T₅ = 5×6/2 = 15 → Yes! <strong>15 = T₅ (5th triangular number)</strong><br>In general: Kₙ has n(n-1)/2 edges = T_(n-1)<br>This is beautiful — complete graphs and triangular numbers are secretly connected! 🔗</div>
+      </div>
+
+      <div class="ai-help-row">
+        <button class="ai-help-btn" onclick="toggleAI('ai5')">🤖 <span><strong>Shapes are confusing — explain simply!</strong></span> <span>▼</span></button>
+        <div class="ai-panel" id="ai5">
+          <div class="ai-panel-hdr"><span style="font-size:18px;">🤖</span><span class="ai-panel-title">Geometry Made Easy — Bheem Explains</span></div>
+          <div class="ai-level-tabs"><div class="alt on" onclick="setAILevel('ai5',0,this)">🍬 Super Easy</div><div class="alt" onclick="setAILevel('ai5',1,this)">📚 Normal</div><div class="alt" onclick="setAILevel('ai5',2,this)">🔬 Advanced</div></div>
+          <div class="ai-content" id="ai5c">
+            <div class="ai-vis">🔵 Regular polygon just means: ALL sides equal + ALL angles equal. Count sides: 3=triangle, 4=square, 5=pentagon, 6=hexagon, 7=heptagon, 8=octagon, 9=nonagon, 10=decagon. It's just counting from 3! Easy!</div>
+            <div class="ai-eg">❄️ Koch Snowflake trick: Start with triangle. Replace each edge with a bump shape (∧). Do it again and again. Each time → 4× more edges. After 3 steps → 3×4³ = 192 edges! It looks like a snowflake! 🌨️</div>
+          </div>
+        </div>
+      </div>
+      <div id="mc-t5"></div>
+    </div>
+
+    <!-- TOPIC 1.6 -->
+    <div class="tc" id="tc6" style="border-left-color:var(--tl);">
+      <div class="tc-num">TOPIC 1.6</div>
+      <div class="tc-title">Relation Between Shape and Number Sequences</div>
+      <div class="tc-body">Shape sequences and number sequences are <strong>secretly connected</strong> in amazing ways!<br><br>• Sides of regular polygons = 3, 4, 5, 6... = <strong>counting numbers from 3</strong><br>• Complete graph Kₙ edges = n(n-1)/2 = <strong>triangular numbers!</strong><br>• Stacked squares = <strong>square numbers</strong> (1, 4, 9, 16...)<br>• Stacked triangles = <strong>triangular numbers</strong> (1, 3, 6, 10...)<br>• Koch Snowflake = 3 × <strong>powers of 4</strong></div>
+      <div class="btip"><span style="font-size:20px;">🐘</span><span>Jumbo: "K2 has 1 line, K3 has 3, K4 has 6, K5 has 10... Wait — those are TRIANGULAR NUMBERS! 1, 3, 6, 10... Shapes and numbers are SECRET FRIENDS! 🤯 Mathematics connects everything!"</span></div>
+
+      <div class="ex-box solved">
+        <div class="ex-tag" style="color:var(--tl);">📘 Solved Example 1 — Connect shape to number sequence</div>
+        <div class="ex-q">Q: Stacked triangles sequence: each shape has rows of smaller triangles. Shape 1 has 1 triangle, Shape 2 has 4, Shape 3 has 9. What sequence is this? What does Shape 10 have?</div>
+        <div class="ex-steps">
+          <div class="ex-step"><div class="ex-step-n">1</div><span>Sequence: 1, 4, 9, 16... → these are SQUARE numbers (1², 2², 3², 4²...)</span></div>
+          <div class="ex-step"><div class="ex-step-n">2</div><span>Shape 10 = 10² = 100 small triangles</span></div>
+          <div class="ex-step"><div class="ex-step-n">3</div><span>Why? In Shape n, each row r has (2r-1) triangles. Sum = 1+3+5+...+(2n-1) = n²!</span></div>
+        </div>
+        <div class="ex-ans">✓ Square number sequence! Shape 10 = 10² = 100 triangles</div>
+      </div>
+
+      <div class="ex-box solved">
+        <div class="ex-tag" style="color:var(--tl);">📘 Solved Example 2 — Koch Snowflake connection</div>
+        <div class="ex-q">Q: In Koch Snowflake, segments at step n = 3×4ⁿ. Also note: Powers of 4 are 1, 4, 16, 64... So segments are 3, 12, 48, 192... Show this is 3 × (powers of 4).</div>
+        <div class="ex-steps">
+          <div class="ex-step"><div class="ex-step-n">1</div><span>Powers of 4: 4⁰=1, 4¹=4, 4²=16, 4³=64, 4⁴=256...</span></div>
+          <div class="ex-step"><div class="ex-step-n">2</div><span>3×4⁰=3, 3×4¹=12, 3×4²=48, 3×4³=192, 3×4⁴=768</span></div>
+          <div class="ex-step"><div class="ex-step-n">3</div><span>Koch Snowflake = 3 × (Powers of 4 sequence). ✓ Shape connects to number!</span></div>
+        </div>
+        <div class="ex-ans">✓ Koch Snowflake: 3, 12, 48, 192, 768... = 3 × powers of 4!</div>
+      </div>
+
+      <div class="ex-box practice">
+        <div class="ex-tag" style="color:var(--school);">✏️ Practice Example 1</div>
+        <div class="ex-q">Q: Stacked squares: Shape 1=1 small square, Shape 2=4, Shape 3=9. What sequence? How many small squares in Shape 15? How many are added from Shape 14 to Shape 15?</div>
+        <textarea class="prac-inp" rows="2" placeholder="Your answer…"></textarea>
+        <button class="show-sol-btn" onclick="toggleSol(this)">👁️ Show Solution</button>
+        <div class="prac-sol"><strong>Sequence:</strong> 1, 4, 9, 16... = square numbers (n²)<br><strong>Shape 15:</strong> 15² = 225 small squares<br><strong>Added from 14 to 15:</strong> 15² - 14² = 225 - 196 = 29 (which is 2×15-1 = 29, an ODD number! The connection appears again!)</div>
+      </div>
+
+      <div class="ex-box practice">
+        <div class="ex-tag" style="color:var(--school);">✏️ Practice Example 2</div>
+        <div class="ex-q">Q: Triangular numbers are 1,3,6,10,15,21,28,36... Multiply each by 6 and add 1: 7, 19, 37, 61... What do you notice? (Hint: These are hexagonal numbers!)</div>
+        <textarea class="prac-inp" rows="2" placeholder="Verify the pattern and find next term…"></textarea>
+        <button class="show-sol-btn" onclick="toggleSol(this)">👁️ Show Solution</button>
+        <div class="prac-sol"><strong>Verify:</strong> 6×1+1=7 ✓, 6×3+1=19 ✓, 6×6+1=37 ✓, 6×10+1=61 ✓<br><strong>Next:</strong> T₅=15 → 6×15+1 = 91 → 5th hexagonal number = 91<br><strong>Pattern:</strong> Hexagonal number Hₙ = 6×Tₙ₋₁ + 1 (except H₁=1). Or Hₙ = n(2n-1). Amazing connection between triangular and hexagonal!</div>
+      </div>
+
+      <div class="ai-help-row">
+        <button class="ai-help-btn" onclick="toggleAI('ai6')">🤖 <span><strong>How are shapes and numbers related? I'm lost!</strong></span> <span>▼</span></button>
+        <div class="ai-panel" id="ai6">
+          <div class="ai-panel-hdr"><span style="font-size:18px;">🤖</span><span class="ai-panel-title">The Hidden Connections — Bheem Reveals!</span></div>
+          <div class="ai-level-tabs"><div class="alt on" onclick="setAILevel('ai6',0,this)">🍬 Super Easy</div><div class="alt" onclick="setAILevel('ai6',1,this)">📚 Normal</div><div class="alt" onclick="setAILevel('ai6',2,this)">🔬 Advanced</div></div>
+          <div class="ai-content" id="ai6c">
+            <div class="ai-vis">🔗 SECRET CONNECTIONS:<br>📐 Count polygon sides → 3,4,5,6,7 = counting numbers (starting 3)!<br>🕸️ Count Kₙ edges → 1,3,6,10,15 = triangular numbers!<br>⬜ Count stacked square tiles → 1,4,9,16 = square numbers!<br>❄️ Count Koch segments → 3,12,48,192 = 3 × powers of 4!<br><br>Numbers and shapes are TWO FACES OF THE SAME TRUTH!</div>
+          </div>
+        </div>
+      </div>
+      <div id="mc-t6"></div>
+    </div>
+  </div><!-- end learn -->
+
+
+  <!-- ════════ SEQUENCES ════════ -->
+  <div id="seq" class="sec">
+    <div class="sec-hdr"><div class="sec-em">🔢</div><div class="sec-ttl">Sequence Explorer Lab</div></div>
+    <div class="seq-tabs" id="seqTabs"></div>
+    <div class="sbox" id="seqBox"><div style="text-align:center;padding:24px;opacity:.35;font-family:'Fredoka One',cursive;">👆 Tap any sequence above to explore it!</div></div>
+  </div>
+
+  <!-- ════════ ANIMATE ════════ -->
+  <div id="anim" class="sec">
+    <div class="sec-hdr"><div class="sec-em">✨</div><div class="sec-ttl">Live Animation Studio</div></div>
+    <div class="stabs2">
+      <button class="stab2 on" id="st1" onclick="setSt(1)">🟦 Odd→Squares</button>
+      <button class="stab2" id="st2" onclick="setSt(2)">🔺 Triangular</button>
+      <button class="stab2" id="st3" onclick="setSt(3)">🌻 Virahānka</button>
+      <button class="stab2" id="st4" onclick="setSt(4)">❄️ Koch</button>
+    </div>
+    <div class="cw">
+      <canvas class="mc2" id="animC" width="360" height="240"></canvas>
+      <div class="ctrl-row">
+        <button class="ctrl-btn" onclick="stPrev()">◀ Prev</button>
+        <div class="ctrl-btn active" style="cursor:default;min-width:90px;text-align:center;" id="stLbl">Step 1</div>
+        <button class="ctrl-btn" onclick="stNext()">Next ▶</button>
+      </div>
+      <div style="font-family:'Fredoka One',cursive;font-size:14px;color:var(--gd);text-align:center;margin-top:7px;" id="stInfo">1 = 1²</div>
+    </div>
+    <div class="btip"><span style="font-size:18px;">🦸</span><span id="animTip">Watch odd numbers build perfect squares! Each coloured L-shape = one odd number added!</span></div>
+  </div>
+
+  <!-- ════════ COMIC ════════ -->
+  <div id="comic" class="sec">
+    <div class="sec-hdr"><div class="sec-em">💥</div><div class="sec-ttl">Bheem's Math Comic</div></div>
+    <div class="comic-wrap">
+      <div class="comic-hdr">🦸 BHEEM &amp; FRIENDS DISCOVER MATH PATTERNS! 🍬</div>
+      <div class="cgrid">
+        <div class="cp" style="background:#1a0533;"><div class="cpn">1</div><div class="cpch">🦸</div><div class="bub" style="background:#e9d5ff;color:#1a0533;">Kalia! Look at my laddoo tiles: 1, 4, 9, 16, 25... Do you see the pattern?</div></div>
+        <div class="cp" style="background:#0a1f0a;"><div class="cpn">2</div><div class="cpch">😈</div><div class="bub r" style="background:#d1fae5;color:#0a1f0a;">Hmph! Just random numbers, Bheem! There's NO pattern!</div></div>
+        <div class="cp w" style="background:#1a1000;"><div class="cpn">3</div><div class="psfx" style="color:var(--gd);">BHEEM POWER! 💪</div><div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:7px;align-items:center;"><div style="font-family:'Fredoka One',cursive;font-size:13px;color:#FDE68A;line-height:1.9;">1+3=4=2²<br>1+3+5=9=3²<br>1+3+5+7=16=4²</div><div class="bub" style="background:#fffbeb;color:#1a1000;">Adding odd numbers ALWAYS makes perfect squares! HIYAAA! 🍬</div></div></div>
+        <div class="cp" style="background:#0d1f44;"><div class="cpn">4</div><div class="cpch">🌸</div><div class="bub" style="background:#dbeafe;color:#0d1f44;">Bheem! Flower petals follow Virahānka: 1,2,3,5,8,13... each = previous TWO added!</div></div>
+        <div class="cp" style="background:#1a0a00;"><div class="cpn">5</div>
+          <div style="display:grid;grid-template-columns:repeat(4,12px);gap:2px;padding:5px 0;">
+            <div style="width:12px;height:12px;border-radius:50%;background:var(--pu)"></div><div style="width:12px;height:12px;border-radius:50%;background:var(--pu)"></div><div style="width:12px;height:12px;border-radius:50%;background:var(--pu)"></div><div style="width:12px;height:12px;border-radius:50%;background:var(--gd)"></div>
+            <div style="width:12px;height:12px;border-radius:50%;background:var(--pu)"></div><div style="width:12px;height:12px;border-radius:50%;background:var(--pu)"></div><div style="width:12px;height:12px;border-radius:50%;background:var(--gd)"></div><div style="width:12px;height:12px;border-radius:50%;background:var(--gd)"></div>
+            <div style="width:12px;height:12px;border-radius:50%;background:var(--pu)"></div><div style="width:12px;height:12px;border-radius:50%;background:var(--gd)"></div><div style="width:12px;height:12px;border-radius:50%;background:var(--gd)"></div><div style="width:12px;height:12px;border-radius:50%;background:var(--gd)"></div>
+            <div style="width:12px;height:12px;border-radius:50%;background:var(--gd)"></div><div style="width:12px;height:12px;border-radius:50%;background:var(--gd)"></div><div style="width:12px;height:12px;border-radius:50%;background:var(--gd)"></div><div style="width:12px;height:12px;border-radius:50%;background:var(--gd)"></div>
+          </div>
+          <div class="bub r" style="background:#fff7ed;color:#1a0a00;font-size:10px;">Each gold L = one odd number!</div>
+        </div>
+        <div class="cp" style="background:#0c1a2c;"><div class="cpn">6</div><div style="display:flex;gap:6px;flex-wrap:wrap;padding:5px 0;align-items:center;">
+          <svg width="24" height="22"><polygon points="12,2 2,20 22,20" fill="none" stroke="#6EE7B7" stroke-width="1.5"/></svg>
+          <svg width="24" height="22"><rect x="2" y="2" width="20" height="20" fill="none" stroke="#818CF8" stroke-width="1.5"/></svg>
+          <svg width="26" height="24"><polygon points="13,1 24,8 20,22 6,22 2,8" fill="none" stroke="#FDE68A" stroke-width="1.5"/></svg>
+          <svg width="26" height="24"><polygon points="13,1 24,7 24,17 13,24 2,17 2,7" fill="none" stroke="#F9A8D4" stroke-width="1.5"/></svg>
+        </div><div class="bub r" style="background:#e0f2fe;color:#0c1a2c;font-size:10px;">3→4→5→6 sides = Regular Polygons!</div></div>
+        <div class="cp w" style="background:#07091a;border-top:3px solid var(--or);"><div class="cpn">7</div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+            <div style="font-size:38px;">🦸🎉🐘🌸🦁</div>
+            <div><div class="psfx" style="color:var(--or);font-size:20px;">MATH IS OUR SUPERPOWER!</div><div class="bub" style="background:#fff7ed;color:#07091a;margin-top:6px;">Every pattern we discover makes us stronger! Keep exploring forever, friend! 🍬</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ QUIZ ════════ -->
+  <div id="quiz" class="sec">
+    <div class="sec-hdr"><div class="sec-em">🎮</div><div class="sec-ttl">Bheem's Quiz Battle!</div></div>
+    <div class="level-selector">
+      <div class="ls-btn on" data-mode="school" onclick="setQLevel('school',this)"><span class="ls-em">🏫</span><div class="ls-name">School</div><div class="ls-desc">NCERT level</div></div>
+      <div class="ls-btn" data-mode="imo" onclick="setQLevel('imo',this)"><span class="ls-em">🥇</span><div class="ls-name">IMO</div><div class="ls-desc">Competition</div></div>
+      <div class="ls-btn" data-mode="national" onclick="setQLevel('national',this)"><span class="ls-em">🏆</span><div class="ls-name">NTSE</div><div class="ls-desc">Advanced</div></div>
+    </div>
+    <div id="quizArea"></div>
+  </div>
+
+  <!-- ════════ VIDEOS ════════ -->
+  <div id="videos" class="sec">
+    <div class="sec-hdr"><div class="sec-em">▶️</div><div class="sec-ttl">Watch &amp; Learn</div></div>
+    <div class="btip" style="margin-bottom:12px;"><span style="font-size:18px;">🦸</span><span>Bheem says: "Watch these 4 amazing videos! I watch them every night before my laddoos! 🍬 Videos make math VISUAL and FUN!"</span></div>
+    <div class="vc"><div class="vt" onclick="openLink('https://www.youtube.com/watch?v=SjSHVDfXHQ4')"><div class="vlbl">📚 NCERT Official</div><div class="vp"><svg width="18" height="18" viewBox="0 0 18 18" fill="white"><polygon points="5,2 16,9 5,16"/></svg></div></div><div class="vb"><div class="vtitle">Patterns in Mathematics — NCERT Class 6 Ch.1 Full</div><div class="vdesc">All sequences, shapes, relations — full chapter explained visually</div><a class="vbtn" href="https://www.youtube.com/watch?v=SjSHVDfXHQ4" target="_blank">▶ Watch Now</a></div></div>
+    <div class="vc"><div class="vt" onclick="openLink('https://www.youtube.com/watch?v=ahXIMUkSXX0')"><div class="vlbl">🌻 Nature</div><div class="vp"><svg width="18" height="18" viewBox="0 0 18 18" fill="white"><polygon points="5,2 16,9 5,16"/></svg></div></div><div class="vb"><div class="vtitle">Virahānka Numbers in Nature</div><div class="vdesc">Flowers, shells, galaxies — the sequence appears everywhere!</div><a class="vbtn" href="https://www.youtube.com/watch?v=ahXIMUkSXX0" target="_blank">▶ Watch Now</a></div></div>
+    <div class="vc"><div class="vt" onclick="openLink('https://www.youtube.com/watch?v=kkGeOWYOFoA')"><div class="vlbl">❄️ Fractal</div><div class="vp"><svg width="18" height="18" viewBox="0 0 18 18" fill="white"><polygon points="5,2 16,9 5,16"/></svg></div></div><div class="vb"><div class="vtitle">Koch Snowflake Fractal — Infinite Beauty</div><div class="vdesc">Watch the snowflake grow with infinite detail!</div><a class="vbtn" href="https://www.youtube.com/watch?v=kkGeOWYOFoA" target="_blank">▶ Watch Now</a></div></div>
+    <div class="vc"><div class="vt" onclick="openLink('https://www.youtube.com/watch?v=VjMoQ7oMPTU')"><div class="vlbl">🎮 Fun</div><div class="vp"><svg width="18" height="18" viewBox="0 0 18 18" fill="white"><polygon points="5,2 16,9 5,16"/></svg></div></div><div class="vb"><div class="vtitle">Number Patterns Made Fun!</div><div class="vdesc">Animated, fun explanation of all key sequences for Class 6</div><a class="vbtn" href="https://www.youtube.com/watch?v=VjMoQ7oMPTU" target="_blank">▶ Watch Now</a></div></div>
+  </div>
+
+  <!-- ════════ CHAT ════════ -->
+  <div id="chat" class="sec">
+    <div class="sec-hdr"><div class="sec-em">🤖</div><div class="sec-ttl">Ask Bheem Anything!</div></div>
+    <div style="font-size:12px;color:#818CF8;margin-bottom:10px;">Bheem explains ANY concept in simple language, gives examples, and never gets tired! Available 24/7! 🦸</div>
+    <div class="chat-wrap">
+      <div class="chat-hdr"><span style="font-size:22px;">🦸</span><div><div style="font-family:'Bangers',cursive;font-size:14px;letter-spacing:1px;">BHEEM — YOUR MATH HERO (Always Ready!)</div><div style="font-size:10px;opacity:.8;">🟢 Online • Answers in simple language • Gives examples!</div></div></div>
+      <div class="chat-msgs" id="chatMsgs"></div>
+      <div class="chat-topics" id="chatTopics"></div>
+      <div class="chat-inp-row">
+        <input class="chat-inp" id="chatInp" placeholder="Ask Bheem any question from Chapter 1…" onkeydown="if(event.key==='Enter')sendChat()"/>
+        <button class="chat-send" onclick="sendChat()">Ask 🦸</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ PRACTICE ════════ -->
+  <div id="practice" class="sec">
+    <div class="sec-hdr"><div class="sec-em">📚</div><div class="sec-ttl">Practice Bank</div></div>
+    <div class="level-selector" style="margin-bottom:14px;">
+      <div class="ls-btn on" data-mode="school" onclick="setPracLevel('school',this)"><span class="ls-em">🏫</span><div class="ls-name">School</div><div class="ls-desc">NCERT exam style</div></div>
+      <div class="ls-btn" data-mode="imo" onclick="setPracLevel('imo',this)"><span class="ls-em">🥇</span><div class="ls-name">IMO Level</div><div class="ls-desc">Olympiad style</div></div>
+      <div class="ls-btn" data-mode="national" onclick="setPracLevel('national',this)"><span class="ls-em">🏆</span><div class="ls-name">NTSE/State</div><div class="ls-desc">Advanced problems</div></div>
+    </div>
+    <div class="prac-tabs">
+      <div class="ptab on" onclick="showPrac('mcq',this)">🔘 MCQ</div>
+      <div class="ptab" onclick="showPrac('tf',this)">✅ True/False</div>
+      <div class="ptab" onclick="showPrac('vsq',this)">⚡ Very Short</div>
+      <div class="ptab" onclick="showPrac('sq',this)">📝 Short Ans</div>
+      <div class="ptab" onclick="showPrac('lq',this)">📄 Long Ans</div>
+      <div class="ptab" onclick="showPrac('cb',this)">📖 Case Based</div>
+    </div>
+    <div class="pset on" id="pset-mcq"><div class="pset-hdr"><div class="pset-icon">🔘</div><div><div class="pset-title">Multiple Choice Questions</div><div class="pset-desc">Tap option → auto check + solution shown!</div></div></div><div id="mcq-list"></div></div>
+    <div class="pset" id="pset-tf"><div class="pset-hdr"><div class="pset-icon">✅</div><div><div class="pset-title">True or False</div><div class="pset-desc">Tap TRUE or FALSE then see explanation!</div></div></div><div id="tf-list"></div></div>
+    <div class="pset" id="pset-vsq"><div class="pset-hdr"><div class="pset-icon">⚡</div><div><div class="pset-title">Very Short Answer (1 mark)</div><div class="pset-desc">Write answer → tap Show Solution!</div></div></div><div id="vsq-list"></div></div>
+    <div class="pset" id="pset-sq"><div class="pset-hdr"><div class="pset-icon">📝</div><div><div class="pset-title">Short Answer (2-3 marks)</div><div class="pset-desc">Write then compare with model answer!</div></div></div><div id="sq-list"></div></div>
+    <div class="pset" id="pset-lq"><div class="pset-hdr"><div class="pset-icon">📄</div><div><div class="pset-title">Long Answer (4-5 marks)</div><div class="pset-desc">Detailed answers — Bheem's model solution included!</div></div></div><div id="lq-list"></div></div>
+    <div class="pset" id="pset-cb"><div class="pset-hdr"><div class="pset-icon">📖</div><div><div class="pset-title">Case Based Questions</div><div class="pset-desc">Real-life stories + questions!</div></div></div><div id="cb-list"></div></div>
+  </div>
+
+  <!-- ════════ OLYMPIAD ════════ -->
+  <div id="compete" class="sec">
+    <div class="comp-hdr">
+      <div class="comp-title">🏆 IMO / OLYMPIAD ZONE 🏆</div>
+      <div class="comp-sub">Next-generation competition preparation — Class 6 Chapter 1</div>
+      <div class="comp-badges"><div class="cbg">🟢 IMO Level 1</div><div class="cbg">🟡 IMO Level 2</div><div class="cbg">🔴 State Olympiad</div><div class="cbg">🟣 National Level</div><div class="cbg">💡 Logical Reasoning</div><div class="cbg">🌍 International</div></div>
+    </div>
+    <div class="btip" style="margin-bottom:12px;"><span style="font-size:20px;">🦸</span><span>Bheem says: "These are REAL questions from IMO, SOF, NTSE competitions! Tough but with practice — you CAN crack them! I believe in you! <strong>Every problem makes you stronger!</strong> 💪"</span></div>
+    <div id="olympiad-list"></div>
+  </div>
+
+  <!-- ════════ MISSIONS ════════ -->
+  <div id="missions" class="sec">
+    <div class="sec-hdr"><div class="sec-em">📝</div><div class="sec-ttl">Bheem's Missions</div></div>
+    <div class="btip" style="margin-bottom:10px;"><span style="font-size:18px;">🦸</span><span>Complete all 7 missions to earn your <strong>Math Hero Badge!</strong> Show your notebook answers to your teacher! 💪</span></div>
+    <div class="prog-wrap"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+    <div style="font-family:'Fredoka One',cursive;font-size:11px;color:#818CF8;margin-bottom:10px;" id="progLbl">0 / 7 Missions Complete</div>
+    <div id="taskList"></div>
+    <div style="text-align:center;margin-top:14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
+      <button class="sbtn" onclick="submitTasks()">🦸 Submit All Missions!</button>
+      <button class="sbtn pbtn" onclick="showSec('chat',document.querySelectorAll('.nb')[6])">🤖 Ask Bheem for Help</button>
+    </div>
+  </div>
+</div><!-- end app -->
+
+<script>
+// ══════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════
+let sName='Hero', userLevel='school', stars=0;
+let qIdx=0,qScore=0,qLives=3,qAnswered=false,qOver=false,qMode='school';
+let stMode=1,stN=1, patR={}, pracLevel='school';
+
+const aiData={
+  ai1:[
+    `<div class="ai-vis">🍬 SUPER EASY: Think of Bheem's laddoos! He puts 1 laddoo, then 4 (2×2), then 9 (3×3)... He notices they make PERFECT SQUARES! That noticing = MATHEMATICS! Math is just finding cool patterns and asking WHY!</div><div class="ai-eg">🌟 Real life patterns: 1,2,3,4 on a calendar, steps in a staircase, heartbeats per minute (about 72), tiles on floor, beads on a necklace. ALL are math!</div>`,
+    `<div class="ai-text">Mathematics is defined as the formal study of patterns — numerical, spatial, logical — and the proofs explaining why they exist. Unlike science which observes, math PROVES. A pattern found in 10 cases might be coincidence; a mathematical proof makes it TRUE for ALL cases — even infinity.</div>`,
+    `<div class="ai-text">Mathematically: a pattern is a function f: ℕ → S (mapping natural numbers to some set S). Mathematics seeks both the function rule f(n) AND proof that f(n) holds ∀n ∈ ℕ. This distinction between "observation" and "proof" is the foundation of rigorous mathematics. Poincaré: "Mathematics is the art of giving the same name to different things."</div>`,
+  ],
+  ai2:[
+    `<div class="ai-vis">🍌 SEQUENCES ARE RECIPES! Triangular: "add 1 more each step" → 1,3,6,10. Square: "square the position" → 1,4,9,16. Virahānka: "always add LAST TWO" → 1,2,3,5,8,13. Cover last two with fingers → next = fingers added!</div><div class="ai-eg">📱 Virahānka in your phone: WhatsApp Group sizes, tree branch patterns, even stock market patterns sometimes follow it! It's EVERYWHERE in nature!</div>`,
+    `<div class="ai-text">Key formulas to remember:<br>• Odd: aₙ = 2n-1 | Sum first n = n²<br>• Even: aₙ = 2n<br>• Triangular: Tₙ = n(n+1)/2<br>• Square: Sₙ = n²<br>• Cube: Cₙ = n³<br>• Virahānka: aₙ = aₙ₋₁ + aₙ₋₂ (recurrence)<br>• Powers of k: aₙ = kⁿ⁻¹</div>`,
+    `<div class="ai-text">Virahānka/Fibonacci: The ratio aₙ₊₁/aₙ → φ = (1+√5)/2 ≈ 1.618 (Golden Ratio). Binet's formula: aₙ = (φⁿ - ψⁿ)/√5 where ψ=(1-√5)/2. Triangular numbers are C(n+1,2) = combinatorial numbers. Square numbers relate to triangular: Sₙ = Tₙ + Tₙ₋₁. These connections run deep through combinatorics and algebraic number theory.</div>`,
+  ],
+  ai3:[
+    `<div class="ai-vis">✏️ DRAW IN YOUR NOTEBOOK RIGHT NOW!<br>Square 9 → make 3 rows of 3 dots: ●●● ●●● ●●●<br>Triangle 10 → rows: ● / ●● / ●●● / ●●●●<br>Compare side by side. Which looks like which shape? THAT'S why they have those names!</div>`,
+    `<div class="ai-text">Visual proofs are called "proofs without words" in mathematics. The key insight: n² can be partitioned into n L-shaped "gnomons", each containing an odd number (2k-1) of dots for k=1..n. This partition PROVES 1+3+5+...+(2n-1) = n² visually without algebra.</div>`,
+    `<div class="ai-text">Figurate numbers bridge discrete mathematics and geometry. Polygonal number P(s,n) = n[(s-2)n-(s-4)]/2 for s-sided polygonal numbers. Square: s=4 → n². Triangle: s=3 → n(n+1)/2. Hexagonal: s=6 → n(2n-1). Fermat's Polygonal Number Theorem (1638): every positive integer is the sum of at most s s-gonal numbers.</div>`,
+  ],
+  ai4:[
+    `<div class="ai-vis">🍬 L-SHAPE MAGIC! Draw 4×4 grid. Now trace the BORDERS: outer L = 7 dots (odd!), next L = 5, next = 3, center = 1. Stack back: 7+5+3+1 = 16 = 4²! Each L-shape IS an odd number! Add them ALL → PERFECT SQUARE! That's the whole secret!</div><div class="ai-eg">🎯 Quick formula: Sum of first n odd numbers = n². So sum of first 100 odd numbers = 100² = 10,000! No need to add 100 numbers!</div>`,
+    `<div class="ai-text">Algebraic proof: n² - (n-1)² = n²-n²+2n-1 = 2n-1 = nth odd number. So each square IS previous square + next odd. This proves by induction: Σᵢ₌₁ⁿ(2i-1) = n².<br>Also: Tₙ + Tₙ₋₁ = n(n+1)/2 + n(n-1)/2 = n(n+1+n-1)/2 = n² ✓</div>`,
+    `<div class="ai-text">Euler's pentagonal theorem, Jacobi's four-square theorem, Lagrange's four-square theorem — all connect figurate numbers. The relation 1+3+5+...+(2n-1)=n² is a special case of the Gaussian arithmetic-geometric progression. For cubes: 1³+2³+3³+...+n³ = [n(n+1)/2]² = Tₙ² — another stunning connection!</div>`,
+  ],
+  ai5:[
+    `<div class="ai-vis">🔵 POLYGON CHEAT SHEET:<br>3 sides → Triangle (TRI = 3)<br>4 sides → Quadrilateral/Square (QUAD = 4)<br>5 sides → Pentagon (PENTA = 5)<br>6 sides → Hexagon (HEXA = 6)<br>7 → Heptagon | 8 → Octagon | 9 → Nonagon | 10 → Decagon<br>Just count from 3! Easy!</div><div class="ai-eg">❄️ Koch: Start triangle → replace each side with ∧ bump → do again → fractal snowflake! After n steps: 3×4ⁿ segments. Infinite perimeter but fits in a finite area!</div>`,
+    `<div class="ai-text">Regular polygon properties: n sides, n angles. Sum of angles = (n-2)×180°. Each angle = (n-2)×180°/n. For n→∞, each angle→180° (becomes a circle). Complete graph Kₙ: n(n-1)/2 edges = T_(n-1). Koch fractal dimension = log4/log3 ≈ 1.26 (between 1D and 2D).</div>`,
+    `<div class="ai-text">Euler's formula: V - E + F = 2 for convex polyhedra (3D). For polygons: V = E = n, F = 2 (top+bottom). Koch Snowflake: Hausdorff dimension d = ln4/ln3. Its perimeter P_n = 3×(4/3)ⁿ×s → ∞ as n→∞. Area A_n = (√3/4)s²×(8/5)[1-(4/9)ⁿ] → (2√3/5)s² as n→∞. Finite area, infinite perimeter!</div>`,
+  ],
+  ai6:[
+    `<div class="ai-vis">🔗 ALL THE CONNECTIONS:<br>Polygon sides → 3,4,5,6,7 = counting from 3!<br>Kₙ edges → 1,3,6,10,15 = triangular numbers!<br>Stacked squares → 1,4,9,16 = square numbers!<br>Koch segments → 3,12,48 = 3 × powers of 4!<br>Shapes and numbers = SAME TRUTH in different clothes!</div>`,
+    `<div class="ai-text">The connections run deep: Kₙ edges = C(n,2) = Tₙ₋₁. Stacked n×n triangle has n² sub-triangles (because rows have 1,3,5,...(2n-1) triangles, sum = n²). These aren't coincidences — they reflect deep combinatorial structure: counting pairs, partitions, and geometric arrangements all lead to the same mathematical objects.</div>`,
+    `<div class="ai-text">Category theory perspective: There's a natural functor between geometric categories (polygons, graphs) and numerical categories (sequences, functions). The "connection" is a natural transformation. Generating functions encode sequences as power series: Σtₙxⁿ. For triangular numbers: Σn(n+1)/2 × xⁿ = x/(1-x)³. This allows analytic methods on combinatorial objects.</div>`,
+  ],
+};
+
+const seqData=[
+  {n:"All 1's",e:"1️⃣",c:"#888780",t:[1,1,1,1,1,1,1,1],r:"Every term = 1. Never changes! aₙ = 1",b:"Even Kalia knows this! Every single term is just 1. Simple but mathematically valid!"},
+  {n:"Counting",e:"🔢",c:"#378ADD",t:[1,2,3,4,5,6,7,8],r:"Add 1 each time. Natural numbers. aₙ = n",b:"I count laddoos exactly like this! 1,2,3,4... Most basic sequence ever!"},
+  {n:"Odd",e:"⚡",c:"#7F77DD",t:[1,3,5,7,9,11,13,15],r:"Skip one each time. aₙ = 2n−1. Sum of first n = n²!",b:"My POWER numbers! Add first n odd numbers → always n²! Magic!"},
+  {n:"Even",e:"⚖️",c:"#1D9E75",t:[2,4,6,8,10,12,14,16],r:"Multiples of 2. aₙ = 2n. Always divisible by 2!",b:"Chutki shares things in even numbers — fair! Sum first n even = n(n+1)!"},
+  {n:"Triangular",e:"🔺",c:"#5DCAA5",t:[1,3,6,10,15,21,28,36],r:"Add one more each step. Tₙ = n(n+1)/2",b:"Jumbo stacks fruit in triangles! 1+2+3+4=10 = T4. Formula: n(n+1)/2!"},
+  {n:"Squares",e:"🟦",c:"#A78BFA",t:[1,4,9,16,25,36,49,64],r:"n². Perfect square dot grids. Built by adding odd numbers!",b:"Built by L-shapes! 1+3=4, 1+3+5=9, 1+3+5+7=16... ALWAYS squares!"},
+  {n:"Cubes",e:"🎲",c:"#F97316",t:[1,8,27,64,125,216],r:"n³. Fill 3D cubes! 2³=8, 3³=27, 4³=64",b:"I build cube towers! 2×2×2=8, 3×3×3=27. They grow VERY fast!"},
+  {n:"Virahānka",e:"🌻",c:"#EF9F27",t:[1,2,3,5,8,13,21,34],r:"Each = previous two added! Indian discovery! Found in nature!",b:"Chutki found this in flowers! 1+2=3, 2+3=5, 3+5=8... Nature = mathematician!"},
+  {n:"Powers 2",e:"💥",c:"#EF4444",t:[1,2,4,8,16,32,64,128],r:"Double each time! aₙ = 2^(n-1). Sum first n = 2ⁿ-1!",b:"Doubles every step! Like my hunger after training! Sum+1 = next power of 2!"},
+  {n:"Powers 3",e:"🌀",c:"#A78BFA",t:[1,3,9,27,81,243],r:"Triple each time! aₙ = 3^(n-1)",b:"Triple every step! 1,3,9,27,81... Kalia can never keep up!"},
+];
+
+const quizSets={
+  school:[
+    {q:"What is 1+3+5+7 (first 4 odd numbers)?",ch:"🦸",o:["12","16","14","18"],a:1,e:"16 = 4²! Sum of first n odd numbers ALWAYS = n². Here n=4, so 4²=16!"},
+    {q:"1,3,6,10,15... are called?",ch:"🔺",o:["Square numbers","Even numbers","Triangular numbers","Cube numbers"],a:2,e:"Triangular! Arrange dots → they form triangle shapes! Formula: n(n+1)/2"},
+    {q:"What is the 5th square number?",ch:"🟦",o:["20","36","25","16"],a:2,e:"5² = 25! Squares: 1,4,9,16,25,36,49..."},
+    {q:"Virahānka: 1,2,3,5,8,13 → next?",ch:"🌻",o:["18","20","21","19"],a:2,e:"13+8 = 21! Each term = sum of previous TWO terms!"},
+    {q:"Which branch studies SHAPE patterns?",ch:"🌸",o:["Algebra","Arithmetic","Geometry","Number Theory"],a:2,e:"Geometry studies patterns in shapes — 1D, 2D, 3D and beyond!"},
+    {q:"How many sides does a Heptagon have?",ch:"🐘",o:["6","7","8","9"],a:1,e:"Hepta = 7! Triangle(3)→Square(4)→Penta(5)→Hexa(6)→Hepta(7)!"},
+    {q:"What is 2³?",ch:"🎲",o:["6","8","4","12"],a:1,e:"2³ = 2×2×2 = 8! Cube numbers: 1,8,27,64,125..."},
+    {q:"Koch Snowflake after step 1 has how many segments?",ch:"❄️",o:["3","6","12","9"],a:2,e:"3 sides × 4 = 12! Each side becomes 4 segments. 3×4=12!"},
+  ],
+  imo:[
+    {q:"If sum of first n odd numbers is 225, what is n?",ch:"🥇",o:["14","15","16","17"],a:1,e:"Sum = n² = 225 → n = √225 = 15! The first 15 odd numbers sum to 225."},
+    {q:"T₁₀ + T₁₁ = ?",ch:"🔺",o:["100","121","110","132"],a:1,e:"T₁₀=55, T₁₁=66. Sum=121=11². Rule: Tₙ + Tₙ₊₁ = (n+1)² always!"},
+    {q:"Complete graph K₇ has how many edges?",ch:"🔗",o:["18","21","24","28"],a:1,e:"K₇ edges = 7×6/2 = 21 = T₆. Complete graphs always give triangular numbers!"},
+    {q:"What is 1+2+3+...+99+100+99+...+2+1?",ch:"🦸",o:["10000","9999","10001","9801"],a:0,e:"This is 1+2+1 pattern! Sum = 100² = 10000! Up-and-down counting always gives a square!"},
+    {q:"Sum of 1³+2³+3³+...+n³ equals?",ch:"🎯",o:["n²(n+1)²/4","n(n+1)(2n+1)/6","n(n+1)/2","n²"],a:0,e:"1³+2³+...+n³ = [n(n+1)/2]² = Tₙ²! The square of nth triangular number! Amazing!"},
+    {q:"Koch Snowflake: after 5 iterations, segments = ?",ch:"❄️",o:["3×4⁴","3×4⁵","3×5⁴","4×3⁵"],a:1,e:"Formula: 3×4ⁿ. After 5 iterations: 3×4⁵ = 3×1024 = 3072 segments!"},
+  ],
+  national:[
+    {q:"The 2nd square triangular number (after 1) is 36. The 3rd is?",ch:"🏆",o:["225","1225","2025","441"],a:1,e:"Square triangular numbers: 1, 36, 1225, 41616... The 3rd is 1225 = 35² = T₄₉!"},
+    {q:"If Tₙ = 210, find n.",ch:"🏆",o:["19","20","21","18"],a:1,e:"n(n+1)/2 = 210 → n(n+1) = 420 → n=20 (20×21=420). So T₂₀ = 210!"},
+    {q:"Sum of squares 1²+2²+3²+...+10² = ?",ch:"🏆",o:["375","385","395","365"],a:1,e:"Formula: n(n+1)(2n+1)/6. For n=10: 10×11×21/6 = 2310/6 = 385!"},
+    {q:"In Virahānka sequence, ratio aₙ₊₁/aₙ as n→∞ approaches?",ch:"🌻",o:["√2","√3","(1+√5)/2","π/2"],a:2,e:"The Golden Ratio φ = (1+√5)/2 ≈ 1.618! The Virahānka ratios: 2/1=2, 3/2=1.5, 5/3=1.67, 8/5=1.6, 13/8=1.625... → φ!"},
+  ],
+};
+
+const practiceBank={
+  school:{
+    mcq:[
+      {q:"Which is a triangular number?",o:["8","10","12","14"],a:1,s:"10 = T₄ = 4×5/2 = 10. Triangular numbers: 1,3,6,10,15,21..."},
+      {q:"Sum of first 6 odd numbers = ?",o:["24","36","30","42"],a:1,s:"Sum of first n odd = n². First 6 odd: 1+3+5+7+9+11 = 36 = 6²!"},
+      {q:"The 6th cube number is?",o:["125","216","343","729"],a:1,s:"6³ = 6×6×6 = 216! Cubes: 1,8,27,64,125,216..."},
+      {q:"Regular polygon with each angle 90° has how many sides?",o:["3","4","5","6"],a:1,s:"(n-2)×180/n = 90 → n=4. A SQUARE! All angles 90°."},
+      {q:"Which is NOT a sequence in Chapter 1?",o:["Odd numbers","Prime numbers","Square numbers","Cube numbers"],a:1,s:"Prime numbers (2,3,5,7,11...) are NOT in Table 1 of Chapter 1! All others are."},
+      {q:"Stacked squares: Shape 7 has how many small squares?",o:["42","49","56","36"],a:1,s:"Shape n = n² small squares. Shape 7 = 7² = 49!"},
+    ],
+    tf:[
+      {s:"The sum of first 5 odd numbers is 25.",a:true,sol:"TRUE! 1+3+5+7+9 = 25 = 5². Sum of first n odd = n². ✓"},
+      {s:"12 is a triangular number.",a:false,sol:"FALSE! Triangular numbers: 1,3,6,10,15,21... 12 is NOT in this list. T₄=10, T₅=15. 12 is missed!"},
+      {s:"Koch Snowflake has both infinite perimeter and infinite area.",a:false,sol:"FALSE! Koch Snowflake has INFINITE perimeter but FINITE area. Paradox of mathematics!"},
+      {s:"The number of sides in regular polygons follows the counting sequence starting from 3.",a:true,sol:"TRUE! Triangle(3), Square(4), Pentagon(5)... sides = 3,4,5,6,7... = counting numbers from 3! ✓"},
+      {s:"K₄ (complete graph with 4 points) has 8 lines.",a:false,sol:"FALSE! K₄ lines = 4×3/2 = 6 lines. Formula: Kₙ = n(n-1)/2."},
+      {s:"Every square number can be written as sum of odd numbers starting from 1.",a:true,sol:"TRUE! n² = 1+3+5+...+(2n-1). Always! This is proved by the L-shape picture. ✓"},
+    ],
+    vsq:[
+      {q:"Write the first 5 triangular numbers.",m:"1 mark",sol:"<strong>Answer:</strong> 1, 3, 6, 10, 15<br>Formula: Tₙ = n(n+1)/2 → T₁=1, T₂=3, T₃=6, T₄=10, T₅=15"},
+      {q:"What is the 7th square number?",m:"1 mark",sol:"<strong>Answer: 49</strong><br>7² = 7×7 = 49. Squares: 1,4,9,16,25,36,49..."},
+      {q:"State the rule for Virahānka sequence.",m:"1 mark",sol:"<strong>Answer:</strong> Each term = sum of the two terms before it.<br>aₙ = aₙ₋₁ + aₙ₋₂ where a₁=1, a₂=2"},
+      {q:"Name the branch studying shape patterns.",m:"1 mark",sol:"<strong>Answer: Geometry</strong><br>Geometry studies patterns in shapes — 1D, 2D, and 3D shapes."},
+      {q:"How many sides does a nonagon have?",m:"1 mark",sol:"<strong>Answer: 9 sides</strong><br>Nona = 9. Regular polygon sequence: triangle(3)→...→nonagon(9)→decagon(10)"},
+      {q:"What is the next term: 1,2,4,8,16,__?",m:"1 mark",sol:"<strong>Answer: 32</strong><br>Powers of 2 — double each time. 16×2 = 32."},
+    ],
+    sq:[
+      {q:"Show with working that 36 is BOTH a triangular number AND a square number.",m:"2 marks",sol:"<strong>As square:</strong> 36 = 6×6 = 6² ✓ (Square number!)<br><strong>As triangle:</strong> T₈ = 8×9/2 = 72/2 = 36 ✓ (Triangular number!)<br>36 is called a <strong>square triangular number</strong> — very rare!"},
+      {q:"Using patterns (not actual addition), find: 1+3+5+7+9+11+13+15+17+19+21",m:"2 marks",sol:"Count the odd numbers: 1,3,5,...,21 → 11 terms (since 21 = 2×11-1)<br>Sum of first 11 odd numbers = 11² = <strong>121</strong><br>Check: Last odd = 21 = 2(11)-1 ✓"},
+      {q:"Find T₁₅ (15th triangular number). How many dots does it have arranged in a triangle?",m:"2 marks",sol:"T₁₅ = 15×16/2 = 240/2 = <strong>120 dots</strong><br>Triangle has 15 rows: Row 1 has 1 dot, Row 2 has 2, ..., Row 15 has 15 dots.<br>Total = 1+2+3+...+15 = 15×16/2 = 120 ✓"},
+    ],
+    lq:[
+      {q:"Explain with pictures why the sum of first n odd numbers is always n². Give working for n=1,2,3,4,5 and also find sum of first 50 odd numbers.",m:"5 marks",sol:"<strong>Visual proof (L-shape method):</strong><br>Draw n×n square grid. Each L-shaped border (gnomon) has odd dots.<br><br>n=1: 1 = 1² ✓<br>n=2: 1+3 = 4 = 2² ✓<br>n=3: 1+3+5 = 9 = 3² ✓<br>n=4: 1+3+5+7 = 16 = 4² ✓<br>n=5: 1+3+5+7+9 = 25 = 5² ✓<br><br><strong>For n=50:</strong> Sum = 50² = <strong>2500</strong><br><br>WHY: kth gnomon (L-shape) contains exactly 2k-1 dots. Stacking n gnomons → n² total dots = perfect square!"},
+      {q:"Describe all 10 number sequences in Table 1 of Chapter 1. For each: write rule, first 5 terms, and one real-life example.",m:"5 marks",sol:"1. <strong>All 1s:</strong> aₙ=1 | 1,1,1,1,1 | Thickness of each page in a book<br>2. <strong>Counting:</strong> aₙ=n | 1,2,3,4,5 | Roll numbers in class<br>3. <strong>Odd:</strong> aₙ=2n-1 | 1,3,5,7,9 | Rows in a staircase pattern<br>4. <strong>Even:</strong> aₙ=2n | 2,4,6,8,10 | Pairs of shoes in a shop<br>5. <strong>Triangular:</strong> Tₙ=n(n+1)/2 | 1,3,6,10,15 | Bowling pin arrangements<br>6. <strong>Square:</strong> n² | 1,4,9,16,25 | Floor tiles in square rooms<br>7. <strong>Cube:</strong> n³ | 1,8,27,64,125 | Sugar cubes in a box<br>8. <strong>Virahānka:</strong> aₙ₋₁+aₙ₋₂ | 1,2,3,5,8 | Flower petal counts in nature<br>9. <strong>Powers of 2:</strong> 2ⁿ⁻¹ | 1,2,4,8,16 | Computer memory sizes (KB,MB,GB)<br>10. <strong>Powers of 3:</strong> 3ⁿ⁻¹ | 1,3,9,27,81 | Branching patterns in trees"},
+    ],
+    cb:[
+      {story:`<strong>🦸 Bheem's Laddoo Festival</strong><br><br>For Dholakpur festival, Bheem arranges laddoos in triangular pyramids. He makes towers of different heights: Tower A (5 rows), Tower B (8 rows), Tower C (10 rows). He also makes a special SQUARE arrangement with 36 laddoos.`,
+       qs:[
+         {q:"(i) How many laddoos in Tower A (5 rows)?",sol:"T₅ = 5×6/2 = <strong>15 laddoos</strong>"},
+         {q:"(ii) How many laddoos in Tower B and C combined?",sol:"T₈ = 8×9/2 = 36. T₁₀ = 10×11/2 = 55. Total = 36+55 = <strong>91 laddoos</strong>"},
+         {q:"(iii) For his 36-laddoo square arrangement — how many rows and columns? Is 36 also a triangular number?",sol:"6×6 = 36 → <strong>6 rows × 6 columns</strong>. Also T₈ = 36 → YES, 36 is also the 8th triangular number! 36 is special!"},
+       ]},
+      {story:`<strong>🌸 Chutki's Pattern Garden</strong><br><br>Chutki plants flowers in patterns. Her first 5 flower beds have petals: 1, 2, 3, 5, 8. She says it follows the Virahānka pattern. Her garden also has hexagonal flower tiles: 1, 7, 19, 37 tiles in rows A, B, C, D.`,
+       qs:[
+         {q:"(i) How many petals does the 7th flower bed have?",sol:"Virahānka: 1,2,3,5,8,13,21... 7th term = <strong>21 petals</strong>"},
+         {q:"(ii) What is the next term in Chutki's hexagonal tile sequence: 1,7,19,37,__?",sol:"Differences: 6,12,18 → next difference = 24. So 37+24 = <strong>61 tiles</strong>"},
+         {q:"(iii) Chutki says 'Virahānka numbers appear in real flowers — 3,5,8 petals are common.' Name one flower for each count.",sol:"3 petals: Lily/Iris | 5 petals: Rose/Hibiscus/Wild rose | 8 petals: Dahlia/Coreopsis<br>These are all Virahānka numbers! Nature uses math! 🌺"},
+       ]},
+    ],
+  },
+  imo:{
+    mcq:[
+      {q:"The sum 1²+2²+3²+...+10² = ?",o:["375","385","395","355"],a:1,s:"Formula: n(n+1)(2n+1)/6. n=10: 10×11×21/6 = 2310/6 = 385"},
+      {q:"Which of these is a square triangular number?",o:["28","36","45","55"],a:1,s:"36 = 6² = T₈. Only 1, 36, 1225... are BOTH square and triangular!"},
+      {q:"Kₙ has 28 edges. What is n?",o:["7","8","9","6"],a:1,s:"n(n-1)/2 = 28 → n(n-1) = 56 → n=8 (8×7=56). So K₈!"},
+      {q:"Virahānka: a₁₂ = 144. What is a₁₃?",o:["178","200","233","222"],a:2,s:"a₁₁=89, a₁₂=144, a₁₃=a₁₁+a₁₂ = 89+144 = 233!"},
+    ],
+    tf:[
+      {s:"1+3+5+...+(2n-1) = n² for ALL positive integers n.",a:true,sol:"TRUE! This can be proven by the L-shape gnomon method. It holds for ALL n, not just small values! ✓"},
+      {s:"The ratio of consecutive Virahānka terms always equals exactly the Golden Ratio φ=(1+√5)/2.",a:false,sol:"FALSE! The ratio APPROACHES φ as n→∞ but never exactly equals it for finite terms. T₈/T₇ = 21/13 ≈ 1.615 ≠ 1.618..."},
+    ],
+    vsq:[
+      {q:"Find n if Tₙ = 120.",m:"1 mark",sol:"n(n+1)/2=120 → n(n+1)=240 → n=15 (15×16=240). <strong>n=15</strong>"},
+      {q:"What is 1³+2³+3³+4³+5³?",m:"1 mark",sol:"Formula: [n(n+1)/2]² = T₅² = 15² = <strong>225</strong>"},
+    ],
+    sq:[
+      {q:"Prove that Tₙ + Tₙ₋₁ = n² using the formula for triangular numbers.",m:"3 marks",sol:"Tₙ = n(n+1)/2 and Tₙ₋₁ = (n-1)n/2<br>Tₙ + Tₙ₋₁ = n(n+1)/2 + n(n-1)/2<br>= n/2 × [(n+1)+(n-1)]<br>= n/2 × 2n = <strong>n²</strong> ✓<br>So two consecutive triangular numbers ALWAYS sum to a square!"},
+      {q:"Sum of powers: 1+2+4+8+...+2ⁿ⁻¹ = ? Prove it.",m:"3 marks",sol:"Let S = 1+2+4+...+2ⁿ⁻¹<br>2S = 2+4+8+...+2ⁿ<br>2S - S = 2ⁿ - 1<br><strong>S = 2ⁿ - 1</strong><br>Example: 1+2+4+8+16 = 31 = 2⁵-1 ✓"},
+    ],
+    lq:[
+      {q:"Prove algebraically that sum of first n odd numbers = n². Then use this to find the sum of odd numbers from 101 to 199.",m:"5 marks",sol:"<strong>Proof:</strong> Sum = Σᵢ₌₁ⁿ(2i-1) = 2·n(n+1)/2 - n = n(n+1)-n = n²+n-n = <strong>n²</strong> ✓<br><br><strong>Application - Sum of 101 to 199 (odd numbers):</strong><br>These are the 51st to 100th odd numbers (since 101=2×51-1, 199=2×100-1)<br>Sum of first 100 odd = 100² = 10000<br>Sum of first 50 odd = 50² = 2500<br>Answer = 10000 - 2500 = <strong>7500</strong>"},
+    ],
+    cb:[
+      {story:`<strong>🥇 IMO Case: The Number Pattern Discovery</strong><br><br>Raju observes a sequence: 1, 5, 14, 30, 55, 91... He calls these "square pyramidal numbers" — they represent balls stacked in square pyramid layers. Each term = 1² + 2² + 3² + ... + n².`,
+       qs:[
+         {q:"(i) Verify: Is 30 = 1²+2²+3²+4²?",sol:"1+4+9+16 = <strong>30 ✓</strong>. Yes! 30 is the 4th square pyramidal number."},
+         {q:"(ii) Find the 7th term using formula: n(n+1)(2n+1)/6",sol:"n=7: 7×8×15/6 = 840/6 = <strong>140</strong>"},
+         {q:"(iii) Show these are related to triangular numbers: Tₙ = Tₙ² - ?",sol:"Actually the formula n(n+1)(2n+1)/6 can be written as Tₙ(2n+1)/3 where Tₙ=n(n+1)/2. So square pyramidal numbers are multiples of triangular numbers!"},
+       ]},
+    ],
+  },
+};
+
+const olympiadData=[
+  {level:"🟢 IMO Level 1 — Pattern Recognition",diff:"easy",qs:[
+    {q:"If the sum of first n odd numbers is 289, find n.",o:["16","17","18","19"],a:1,s:"n² = 289 → n = √289 = 17. Sum of first 17 odd numbers = 289 = 17²!"},
+    {q:"Two consecutive triangular numbers add to 100. Find both.",o:["T₉+T₁₀","T₈+T₉","T₁₀+T₁₁","T₇+T₈"],a:0,s:"Tₙ+Tₙ₊₁=(n+1)². Set (n+1)²=100 → n+1=10 → n=9. T₉=45, T₁₀=55. Check: 45+55=100=10² ✓"},
+    {q:"1+2+3+...+100+99+...+2+1 = ?",o:["9999","10000","10001","9801"],a:1,s:"Count-up-then-down = 100² = 10000! The pattern 1+2+3+...+n+...+3+2+1 = n² always!"},
+  ]},
+  {level:"🟡 IMO Level 2 — Deeper Patterns",diff:"med",qs:[
+    {q:"Sum 1³+2³+3³+...+10³ = ?",o:["2025","3025","1025","4025"],a:1,s:"Formula: [n(n+1)/2]² = T₁₀² = 55² = 3025! Cubes sum to square of triangular!"},
+    {q:"Virahānka: a₁₅ = 610, a₁₄ = 377. What is a₁₆?",o:["937","987","967","977"],a:1,s:"a₁₆ = a₁₅ + a₁₄ = 610 + 377 = 987! Virahānka sequence continues..."},
+    {q:"K₁₀ has n(n-1)/2 edges. How many triangles (3-vertex subgraphs) does it have?",o:["C(10,3)","C(10,2)","C(9,3)","C(10,4)"],a:0,s:"Number of triangles in Kₙ = C(n,3) = n!/(3!(n-3)!). For K₁₀: C(10,3) = 10×9×8/6 = 120 triangles!"},
+  ]},
+  {level:"🔴 State Olympiad — Advanced Problems",diff:"hard",qs:[
+    {q:"The 3rd square triangular number (after 1 and 36) is?",o:["225","1225","2025","441"],a:1,s:"Square triangular numbers: 1, 36, 1225, 41616... The 3rd is 1225 = 35² = T₄₉!"},
+    {q:"If aₙ is Virahānka, prove aₙ² - aₙ₋₁·aₙ₊₁ = ±1. For a₅=8: 8²-5×13=?",o:["-1","0","1","2"],a:0,s:"64-65 = -1. This is Cassini's Identity! aₙ² - aₙ₋₁·aₙ₊₁ = (-1)ⁿ. Alternates between +1 and -1!"},
+    {q:"Sum of first n cubes equals square of Tₙ. Find n if 1³+2³+...+n³ = 3025",o:["9","10","11","12"],a:1,s:"[Tₙ]² = 3025 → Tₙ = 55 = T₁₀ → n=10! So 1³+2³+...+10³ = 55² = 3025 ✓"},
+  ]},
+  {level:"🟣 National / International Level",diff:"oly",qs:[
+    {q:"Polygonal number P(s,n) = n[(s-2)n-(s-4)]/2. For s=5 (pentagon), P(5,6) = ?",o:["51","66","35","81"],a:0,s:"P(5,6) = 6[(5-2)×6-(5-4)]/2 = 6[18-1]/2 = 6×17/2 = 51. 51 is the 6th pentagonal number!"},
+    {q:"Koch Snowflake: after n iterations, area Aₙ = (√3/4)s²×(8/5)×[1-(4/9)ⁿ]. As n→∞, Aₙ → ?",o:["(√3/4)s²","(2√3/5)s²","(8√3/5)s²","(√3/5)s²"],a:1,s:"As n→∞, (4/9)ⁿ→0, so Aₙ → (√3/4)s²×(8/5) = (2√3/5)s². Finite! Despite infinite perimeter!"},
+  ]},
+];
+
+const taskData=[
+  {l:"Mission 1 — Pattern Hunter",q:"Write next 3 terms for: Odd numbers (1,3,5,7,...), Triangular numbers (1,3,6,10,...), Virahānka (1,2,3,5,8,13,...). State the rule for EACH.",c:"var(--or)"},
+  {l:"Mission 2 — Chutki's Flowers",q:"Chutki counts petals: 1,2,3,5,8,13. What are the next 3? Find one real flower for each of: 3 petals, 5 petals, 8 petals. (Search or observe in nature!)",c:"var(--pk)"},
+  {l:"Mission 3 — Bheem's Laddoo Towers",q:"Draw triangular arrangements for T₃, T₄, T₅ in your notebook. Also show that 36 dots can be arranged BOTH as a 6×6 square AND as a triangular tower.",c:"var(--gr)"},
+  {l:"Mission 4 — The Odd Number Magic",q:"PROVE the magic: 1+3+5+7+9+11+13 = ? What is 100²? Using the pattern, find sum of first 100 odd numbers WITHOUT adding them all!",c:"var(--gd)"},
+  {l:"Mission 5 — Shape Detective",q:"Count sides of all regular polygons from triangle to decagon. Which number sequence? Count Koch Snowflake segments for steps 0,1,2,3,4. Which sequence?",c:"var(--pu)"},
+  {l:"Mission 6 — The Big Connection",q:"Kₙ edges = n(n-1)/2. Calculate for K₃, K₄, K₅, K₆. Which number sequence do you get? How does this connect to triangular numbers?",c:"var(--tl)"},
+  {l:"Mission 7 ⭐ BONUS — Create Your Own",q:"INVENT a number sequence! Write: (a) First 6 terms, (b) The rule in words, (c) The formula, (d) One real-life example, (e) Draw the sequence visually.",c:"var(--rd)"},
+];
+
+const chatK={
+  pattern:["A pattern is anything that repeats or follows a rule! Like Bheem's laddoos: 1,2,3,4 — add 1 each time. Patterns are EVERYWHERE — in nature, music, tiles, even heartbeats!","Every time Bheem runs to save Dholakpur, he takes the SAME shortest path — that's a pattern! Math finds these patterns and explains WHY they exist. That's the beauty!"],
+  "number theory":["Number Theory is the branch studying patterns in whole numbers 0,1,2,3... It studies sequences, properties of numbers, and amazing relationships between them!","Number theory gave us: modern encryption (keeps your WhatsApp safe!), prime number algorithms (used in banking!), and calendar calculations. Bheem uses it to count laddoos! 🍬"],
+  triangular:["Triangular numbers: 1,3,6,10,15,21,28,36... Formula: Tₙ = n(n+1)/2. Arrange that many dots → perfect triangle shape! T₄=10 means 4 rows: 1+2+3+4=10!","MAGIC: Two consecutive triangular numbers ALWAYS add to a square! T₄+T₅ = 10+15 = 25 = 5²! Also: T₈ = 36 = 6² — so 36 is BOTH triangular AND square! 🔺"],
+  square:["Square numbers: 1,4,9,16,25,36,49... = n². Arrange as square grids! MOST BEAUTIFUL FACT: Sum of first n odd numbers = n². Always! 1+3+5+7+9 = 25 = 5²! 🟦","Proof of odd→square: Draw n×n grid. Each L-shaped border has an odd number of dots. Stack n L-shapes → n² dots = perfect square! It's visual and provable!"],
+  odd:["Odd numbers: 1,3,5,7,9... Rule: 2n-1. MAGICAL property: 1+3+5+...+(2n-1) = n²! Always! Without exception! 1+3=4=2², 1+3+5=9=3²... This works for ALL n! ⚡","Sum of first 100 odd numbers = 100² = 10,000! No need to add 100 numbers — just square 100! That's the POWER of mathematical patterns!"],
+  fibonacci:["Virahānka sequence (Fibonacci in West): 1,2,3,5,8,13,21... Each = previous two added! Discovered by Indian mathematician Virahānka centuries before Fibonacci!","Found in: sunflower seed spirals (usually 34+55 spirals), pinecone scales, nautilus shell growth, rose petal arrangement, galaxy spiral arms! Nature uses this sequence for EFFICIENT PACKING! 🌻"],
+  virahanka:["Virahānka was an ancient Indian mathematician who discovered this sequence! India discovered it FIRST! 1,2,3,5,8,13,21,34,55,89,144...","The ratio of consecutive terms → Golden Ratio φ = (1+√5)/2 ≈ 1.618. This ratio appears in the proportions of the Parthenon, da Vinci's paintings, DNA structure, and even credit card dimensions! 🌸"],
+  cube:["Cube numbers: 1,8,27,64,125... = n³. 2³=2×2×2=8 (2×2×2 cube!). AMAZING: 1³+2³+3³+...+n³ = [n(n+1)/2]² = Tₙ²! Sum of cubes = square of triangular number! 🎲","3×3×3 sugar cube box needs 27 small cubes. 4×4×4 needs 64. Volume = side³. This is why they're CUBE numbers!"],
+  geometry:["Geometry studies patterns in shapes! Regular polygons: Triangle(3), Square(4), Pentagon(5), Hexagon(6)... sides = 3,4,5,6... = counting numbers! Interior angle sum = (n-2)×180°!","Koch Snowflake: a FRACTAL! Infinite perimeter (goes on forever!) but FINITE area (fits in a circle!). Fractal dimension = log4/log3 ≈ 1.26. It's between a line (1D) and a plane (2D)! 🌨️"],
+  koch:["Koch Snowflake: start triangle, replace each side with a 'speed bump' (∧), repeat forever! Segments: 3→12→48→192 = 3×4ⁿ (3 times powers of 4). Infinite detail!","After n steps: perimeter = 3×(4/3)ⁿ → ∞. But area converges to 8/5 × original triangle area. Infinite boundary, finite content — like a coastline! FRACTAL! ❄️"],
+  polygon:["Regular polygons: equal sides AND equal angles. Triangle(3), Square(4), Pentagon(5), Hexagon(6), Heptagon(7), Octagon(8), Nonagon(9), Decagon(10)!","Each interior angle = (n-2)×180/n. Triangle=60°, Square=90°, Hexagon=120°. Hexagon tiles perfectly — that's why bees make hexagonal honeycomb! Nature optimises! 🐝"],
+  imo:["For IMO: Key skill = finding general formula, not just next term! Practice: 1) Find pattern 2) State rule 3) PROVE it works for ALL cases (not just first few) 4) Find exceptions!","IMO Chapter 1 question types: Figurate number relations, sequence proofs, combinatorial connections between shapes and numbers. Study: Cassini's identity for Virahānka, telescoping sums for odd numbers, bijective proofs! 💡"],
+  default:["Great question! I'm Bheem, always ready to help! Ask me about: patterns, sequences, triangular numbers, square numbers, Virahānka, geometry, Koch Snowflake, or anything from Chapter 1! 🦸","Let me share something mind-blowing: 1³+2³+3³+...+n³ = (1+2+3+...+n)²! Sum of cubes = square of sum! 1³+2³+3³ = 36 = (1+2+3)² = 6²! This is Nicomachus's theorem! 🤯"],
+};
+
+const mcTopics=[
+  {id:'mc-t1',title:'1.1 — What is Math?',sub:'Ask about patterns in daily life',qs:['What is a pattern?','Real life examples','Why is math called art AND science?','What does math explain?']},
+  {id:'mc-t2',title:'1.2 — Number Sequences',sub:'Ask about any sequence',qs:['What are triangular numbers?','Explain square numbers','What is Virahānka?','Odd number magic']},
+  {id:'mc-t3',title:'1.3 — Visualising',sub:'Ask how to draw sequences',qs:['How to draw square numbers?','Draw triangular numbers','Show 36 both ways','Powers of 2 visually']},
+  {id:'mc-t4',title:'1.4 — Relations',sub:'Ask about sequence connections',qs:['Why odd→squares?','Sum of first 100 odd?','Triangular pairs=squares?','Powers of 2 sum trick']},
+  {id:'mc-t5',title:'1.5 — Shape Patterns',sub:'Ask about geometry',qs:['What is Koch Snowflake?','Regular polygon angles','How many sides octagon?','Fractal definition']},
+  {id:'mc-t6',title:'1.6 — Shape+Number Links',sub:'Ask about connections',qs:['Complete graph K6 edges?','Koch formula?','Stacked triangles=?','Hexagonal numbers']},
+];
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+function buildParticles(){
+  const bg=document.getElementById('spBg');
+  const colors=['#FF9933','#FFD700','#FF6B9D','#7C3AED','#0891B2','#138808'];
+  for(let i=0;i<30;i++){
+    const d=document.createElement('div');d.className='sp-particle';
+    const sz=Math.random()*16+6;
+    d.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};opacity:${Math.random()*.3+.1};animation-duration:${6+Math.random()*8}s;animation-delay:${Math.random()*5}s;border-radius:${Math.random()>0.5?'50%':'3px'};`;
+    bg.appendChild(d);
+  }
+}
+
+function pickLevel(lvl,btn){
+  document.querySelectorAll('.lp-btn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  userLevel=lvl;
+}
+
+function startApp(){
+  const n=document.getElementById('spName').value.trim();
+  if(!n){
+    document.getElementById('spName').style.borderColor='#ef4444';
+    document.getElementById('spName').placeholder='Please type your name! 🙏';
+    setTimeout(()=>{document.getElementById('spName').style.borderColor='var(--or)';document.getElementById('spName').placeholder='Type your name…';},2000);
+    return;
+  }
+  sName=n;
+  try{localStorage.setItem('bheemName',sName);localStorage.setItem('bheemLevel',userLevel);}catch(e){}
+  launchApp();
+}
+
+function launchApp(){
+  document.getElementById('tbName').textContent=sName+' ✎';
+  applyLevel();
+  const sp=document.getElementById('splash');
+  sp.classList.add('hide');
+  setTimeout(()=>sp.style.display='none',500);
+  document.getElementById('app').style.display='block';
+  buildAll();
+}
+
+function applyLevel(){
+  const lvlMap={school:{label:'🏫 School',bg:'var(--school)'},imo:{label:'🥇 IMO',bg:'var(--or)'},national:{label:'🏆 NTSE',bg:'var(--rd)'},global:{label:'🌍 Global',bg:'var(--pu)'}};
+  const cfg=lvlMap[userLevel]||lvlMap.school;
+  const el=document.getElementById('tbLevel');
+  if(el){el.textContent=cfg.label;el.style.background=cfg.bg+'33';el.style.borderColor=cfg.bg;el.style.color=cfg.bg;}
+}
+
+function changeLevelQuick(){
+  const levels=['school','imo','national','global'];
+  const idx=levels.indexOf(userLevel);
+  userLevel=levels[(idx+1)%levels.length];
+  try{localStorage.setItem('bheemLevel',userLevel);}catch(e){}
+  applyLevel();
+}
+
+function changeName(){
+  const n=prompt('Enter your name:',sName);
+  if(n&&n.trim()){sName=n.trim();document.getElementById('tbName').textContent=sName+' ✎';try{localStorage.setItem('bheemName',sName);}catch(e){}}
+}
+
+function buildAll(){
+  buildPatReveal();buildSeqTabs();buildQuiz();
+  buildPractice();buildOlympiad();buildTasks();
+  buildChat();buildMiniChats();buildAIPanels();
+  setTimeout(()=>stDraw(),100);
+}
+
+// ══════════════════════════════════════════
+// NAV
+// ══════════════════════════════════════════
+function showSec(id,btn){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  if(btn)btn.classList.add('on');
+  if(id==='anim')setTimeout(()=>stDraw(),50);
+}
+
+function addStar(n){stars+=n;document.getElementById('starCount').textContent=stars;}
+
+// ══════════════════════════════════════════
+// PATTERN REVEAL
+// ══════════════════════════════════════════
+function buildPatReveal(){
+  const pats=[{e:"1",a:"1",h:"= 1²"},{e:"1 + 3",a:"4",h:"= 2²"},{e:"1 + 3 + 5",a:"9",h:"= 3²"},{e:"1 + 3 + 5 + 7",a:"16",h:"= 4²"},{e:"1 + 3 + 5 + 7 + 9",a:"25",h:"= 5²"},{e:"1 + 3 + 5 + 7 + 9 + 11",a:"36",h:"= 6² 🌟"}];
+  const el=document.getElementById('patReveal');
+  if(el)el.innerHTML=pats.map((p,i)=>`<div class="patrow" onclick="revP(${i})"><span class="peq">${p.e} =</span><span class="pans">${patR[i]?p.a:'❓'}</span><span class="phnt">${patR[i]?p.h:'click!'}</span></div>`).join('');
+}
+function revP(i){patR[i]=true;addStar(2);buildPatReveal();}
+
+// ══════════════════════════════════════════
+// AI PANELS
+// ══════════════════════════════════════════
+function buildAIPanels(){for(let i=1;i<=6;i++){const el=document.getElementById(`ai${i}c`);if(el)el.innerHTML=aiData[`ai${i}`][0];}}
+function toggleAI(id){document.getElementById(id).classList.toggle('open');}
+function setAILevel(id,lvl,btn){
+  btn.parentElement.querySelectorAll('.alt').forEach((t,i)=>t.classList.toggle('on',i===lvl));
+  const el=document.getElementById(id+'c');
+  if(el)el.innerHTML=aiData[id][lvl];
+}
+
+// ══════════════════════════════════════════
+// SHOW/HIDE SOL
+// ══════════════════════════════════════════
+function toggleSol(btn){
+  const sol=btn.nextElementSibling;
+  if(sol){sol.classList.toggle('open');btn.textContent=sol.classList.contains('open')?'🙈 Hide Solution':'👁️ Show Solution';}
+}
+
+// ══════════════════════════════════════════
+// MINI CHATS
+// ══════════════════════════════════════════
+function buildMiniChats(){
+  mcTopics.forEach(mc=>{
+    const el=document.getElementById(mc.id);if(!el)return;
+    const qs=mc.qs.map(q=>`<div class="mq" onclick="mcQ('${mc.id}','${q}')">${q}</div>`).join('');
+    el.innerHTML=`<div class="mc-wrap">
+      <div class="mc-tog" onclick="toggleMC('${mc.id}')">
+        <div class="mc-char">🦸</div>
+        <div class="mc-lbl"><div class="mc-lbl-t">💬 Ask Bheem about ${mc.title}!</div><div class="mc-lbl-s">${mc.sub}</div></div>
+        <div class="mc-arr" id="mcarr-${mc.id}">▼</div>
+      </div>
+      <div class="mc-body" id="mcbody-${mc.id}">
+        <div class="mc-msgs" id="mcmsgs-${mc.id}"><div class="mm b"><div class="mav">🦸</div><div class="mb">Jai Hind! 🦸 I'm Bheem! Ask me anything about <b>${mc.title}</b>! Tap a quick question or type your own! Always happy to help! 🍬</div></div></div>
+        <div class="mc-qq">${qs}</div>
+        <div class="mc-inp-row"><input class="mc-inp" id="mcinp-${mc.id}" placeholder="Ask Bheem…" onkeydown="if(event.key==='Enter')mcSend('${mc.id}')"/><button class="mc-send" onclick="mcSend('${mc.id}')">Ask 🦸</button></div>
+      </div>
+    </div>`;
+  });
+}
+function toggleMC(id){const b=document.getElementById('mcbody-'+id);const a=document.getElementById('mcarr-'+id);const o=b.classList.toggle('open');a.classList.toggle('open',o);}
+function mcQ(id,q){mcAddU(id,q);mcResp(id,q);}
+function mcSend(id){const inp=document.getElementById('mcinp-'+id);const t=inp.value.trim();if(!t)return;inp.value='';mcAddU(id,t);mcResp(id,t);}
+function mcAddU(id,txt){
+  document.getElementById('mcbody-'+id).classList.add('open');
+  document.getElementById('mcarr-'+id).classList.add('open');
+  const msgs=document.getElementById('mcmsgs-'+id);
+  const d=document.createElement('div');d.className='mm u';
+  d.innerHTML=`<div class="mav">😊</div><div class="mb">${txt}</div>`;
+  msgs.appendChild(d);
+  const tp=document.createElement('div');tp.className='mm b';tp.id='mct-'+id;
+  tp.innerHTML=`<div class="mav">🦸</div><div class="td"><div class="tdd"></div><div class="tdd"></div><div class="tdd"></div></div>`;
+  msgs.appendChild(tp);msgs.scrollTop=msgs.scrollHeight;
+}
+function mcResp(id,txt){
+  const lower=txt.toLowerCase();let key='default';
+  for(const k of Object.keys(chatK)){if(lower.includes(k)){key=k;break;}}
+  const r=chatK[key];const reply=r[Math.floor(Math.random()*r.length)];
+  setTimeout(()=>{
+    const t=document.getElementById('mct-'+id);if(t)t.remove();
+    const msgs=document.getElementById('mcmsgs-'+id);
+    const d=document.createElement('div');d.className='mm b';
+    d.innerHTML=`<div class="mav">🦸</div><div class="mb">${reply}</div>`;
+    msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;addStar(1);
+  },700+Math.random()*500);
+}
+
+// ══════════════════════════════════════════
+// SEQUENCES
+// ══════════════════════════════════════════
+function buildSeqTabs(){
+  document.getElementById('seqTabs').innerHTML=seqData.map((s,i)=>`<div class="stab" onclick="showSeq(${i})">${s.e} ${s.n}</div>`).join('');
+}
+function showSeq(i){
+  document.querySelectorAll('.stab').forEach((t,j)=>t.classList.toggle('on',j===i));
+  const s=seqData[i];
+  const dots=s.t.slice(0,6).map(n=>Array(Math.min(n,9)).fill(`<div class="sdot" style="width:8px;height:8px;background:${s.c};"></div>`).join('')).join('');
+  document.getElementById('seqBox').innerHTML=`<div style="font-size:18px;margin-bottom:4px;">${s.e}</div><div class="sterms">${s.t.join(', ')} …</div><div style="display:flex;flex-wrap:wrap;gap:4px;margin:6px 0;min-height:28px;">${dots}</div><div style="font-family:'Fredoka One',cursive;font-size:14px;margin-bottom:4px;">${s.n}</div><div style="font-size:12px;color:#818CF8;margin-bottom:8px;">${s.r}</div><div class="btip" style="margin:0;"><span style="font-size:17px;">🦸</span><span>${s.b}</span></div>`;
+  addStar(1);
+}
+
+// ══════════════════════════════════════════
+// ANIMATIONS
+// ══════════════════════════════════════════
+function setSt(m){
+  stMode=m;stN=1;
+  for(let i=1;i<=4;i++)document.getElementById('st'+i).classList.toggle('on',i===m);
+  const tips=["Odd numbers stack into perfect squares! Each colour = one L-shape = one odd number!","Triangular numbers grow row by row — each new row adds one more dot!","Virahānka spiral: each circle = one term. Previous two circles always sum to next!","Koch Snowflake fractal — infinite iterations create infinite detail from a simple triangle!"];
+  document.getElementById('animTip').textContent=tips[m-1];
+  stDraw();
+}
+function stPrev(){if(stN>1){stN--;stDraw();}}
+function stNext(){const mx=[6,6,8,4];if(stN<mx[stMode-1]){stN++;stDraw();}}
+function stDraw(){
+  const c=document.getElementById('animC');if(!c)return;
+  const ctx=c.getContext('2d'),W=c.width,H=c.height;
+  ctx.fillStyle='#050d1e';ctx.fillRect(0,0,W,H);
+  if(stMode===1)dOSq(ctx,W,H);else if(stMode===2)dTri(ctx,W,H);else if(stMode===3)dFib(ctx,W,H);else dKoch(ctx,W,H);
+}
+function dOSq(ctx,W,H){
+  const n=stN,ds=15,g=5,t=ds+g;
+  const sx=Math.floor(W/2-n*t/2),sy=Math.floor(H/2-n*t/2);
+  const pal=['#FF9933','#7C3AED','#138808','#0891B2','#EF4444','#DB2777'];
+  for(let r=0;r<n;r++)for(let c2=0;c2<n;c2++){
+    ctx.beginPath();ctx.arc(sx+c2*t+ds/2,sy+r*t+ds/2,ds/2,0,Math.PI*2);
+    ctx.fillStyle=pal[Math.max(r,c2)%pal.length];ctx.fill();
+  }
+  document.getElementById('stLbl').textContent='n = '+n;
+  document.getElementById('stInfo').textContent=Array.from({length:n},(_,i)=>2*i+1).join('+')+' = '+n*n+' = '+n+'²';
+}
+function dTri(ctx,W,H){
+  const n=stN,r=12,g=4,t=r*2+g;
+  const sy=Math.floor(H/2-n*t/2+r);
+  for(let row=0;row<n;row++){const cnt=row+1,sx=Math.floor(W/2-cnt*t/2+r);for(let c2=0;c2<cnt;c2++){ctx.beginPath();ctx.arc(sx+c2*t,sy+row*t,r,0,Math.PI*2);ctx.fillStyle='#138808';ctx.fill();ctx.strokeStyle='#6EE7B7';ctx.lineWidth=1.5;ctx.stroke();}}
+  const tv=[1,3,6,10,15,21];document.getElementById('stLbl').textContent='T'+n;document.getElementById('stInfo').textContent='T'+n+' = '+tv[n-1];
+}
+function dFib(ctx,W,H){
+  const fib=[1,1,2,3,5,8,13,21];const maxN=Math.min(stN,fib.length);
+  let x=W/2,y=H/2,ang=0,sc=6;
+  const pal=['#FF9933','#7C3AED','#138808','#EF4444','#FFD700','#DB2777','#0891B2','#6EE7B7'];
+  ctx.strokeStyle='rgba(255,215,0,.18)';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(x,y);
+  for(let i=0;i<maxN;i++){const len=fib[i]*sc;x+=Math.cos(ang)*len;y+=Math.sin(ang)*len;ctx.lineTo(x,y);ang+=Math.PI/2;}ctx.stroke();
+  x=W/2;y=H/2;
+  for(let i=0;i<maxN;i++){const rad=Math.max(fib[i]*sc*.3,9);ctx.beginPath();ctx.arc(x,y,rad,0,Math.PI*2);ctx.fillStyle=pal[i%pal.length];ctx.fill();ctx.fillStyle='#fff';ctx.font='bold 8px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(fib[i],x,y);const len=fib[i]*sc;x+=Math.cos(i*Math.PI/2)*len;y+=Math.sin(i*Math.PI/2)*len;}
+  document.getElementById('stLbl').textContent='Step '+stN;document.getElementById('stInfo').textContent='Virahānka: '+fib.slice(0,maxN).join(', ')+' …';
+}
+function kPts(ax,ay,bx,by,d){if(!d)return[[ax,ay],[bx,by]];const dx=bx-ax,dy=by-ay;const p1x=ax+dx/3,p1y=ay+dy/3,p2x=ax+2*dx/3,p2y=ay+2*dy/3,mx=ax+dx/2,my=ay+dy/2,px=mx-dy*Math.sqrt(3)/6,py=my+dx*Math.sqrt(3)/6;return[...kPts(ax,ay,p1x,p1y,d-1).slice(0,-1),...kPts(p1x,p1y,px,py,d-1).slice(0,-1),...kPts(px,py,p2x,p2y,d-1).slice(0,-1),...kPts(p2x,p2y,bx,by,d-1)];}
+function dKoch(ctx,W,H){
+  const d=Math.min(stN-1,3),sz=80,cx=W/2,cy=H/2+20;
+  const p=[[cx,cy-sz],[cx+sz*Math.sin(2.094),cy-sz*Math.cos(2.094)],[cx+sz*Math.sin(4.189),cy-sz*Math.cos(4.189)]];
+  const pal=['#FF9933','#7C3AED','#138808'];
+  [[0,1],[1,2],[2,0]].forEach(([a,b],si)=>{const segs=kPts(p[a][0],p[a][1],p[b][0],p[b][1],d);ctx.beginPath();ctx.moveTo(segs[0][0],segs[0][1]);segs.forEach(pt=>ctx.lineTo(pt[0],pt[1]));ctx.strokeStyle=pal[si];ctx.lineWidth=1.5;ctx.stroke();});
+  document.getElementById('stLbl').textContent='Iter '+stN;document.getElementById('stInfo').textContent='Segments: '+[3,12,48,192][Math.min(d,3)];
+}
+
+// ══════════════════════════════════════════
+// QUIZ
+// ══════════════════════════════════════════
+function setQLevel(mode,btn){
+  qMode=mode;qIdx=0;qScore=0;qLives=3;qAnswered=false;qOver=false;
+  document.querySelectorAll('.level-selector .ls-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  buildQuiz();
+}
+function buildQuiz(){renderQuiz();}
+function renderQuiz(){
+  const ga=document.getElementById('quizArea');
+  const qs=quizSets[qMode]||quizSets.school;
+  if(qOver||qIdx>=qs.length){
+    const sc=qScore,total=qs.length,pct=Math.round(sc/total*100);
+    const [em,msg]=pct===100?['🏆','PERFECT! Math Legend!']:pct>=70?['🌟','Amazing! Math Hero!']:pct>=40?['👍','Good effort! Keep going!']:['💪','Practice more! Bheem believes in you!'];
+    ga.innerHTML=`<div class="go-card"><span class="go-em">${em}</span><div class="go-sc">${sc}/${total}</div><div style="font-family:'Fredoka One',cursive;font-size:16px;margin:6px 0;">${msg}</div><div style="font-size:12px;color:#818CF8;margin-bottom:12px;">${pct}% correct • ${sc*10} stars earned!</div><button style="padding:10px 24px;background:var(--gr);border:none;border-radius:13px;color:#fff;font-family:'Bangers',cursive;font-size:17px;cursor:pointer;" onclick="resetQ()">🦸 Play Again!</button></div>`;
+    addStar(sc*10);return;
+  }
+  const q=qs[qIdx];const pct=Math.round(qIdx/qs.length*100);
+  const hearts='❤️'.repeat(qLives)+'🖤'.repeat(Math.max(0,3-qLives));
+  ga.innerHTML=`<div class="ghud"><div class="gchip">⭐ ${qScore*10}</div><div style="font-family:'Fredoka One',cursive;font-size:11px;color:#A5B4FC;">Q${qIdx+1}/${qs.length}</div><div class="glives">${hearts}</div></div>
+    <div class="qcard"><div class="qchar">${q.ch}</div><div class="qtext">${q.q}</div>
+    <div class="ogrid">${q.o.map((o,i)=>`<button class="opt" id="o${i}" onclick="pickQ(${i})">${o}</button>`).join('')}</div>
+    <div id="qmsg" style="font-family:'Fredoka One',cursive;font-size:13px;text-align:center;margin:8px 0;min-height:18px;"></div>
+    <div id="solDiv"></div></div>
+    <div style="text-align:center;"><button class="nxtQ" id="nxtBtn" onclick="nextQ()">Next ▶</button></div>
+    <div class="xpw"><div class="xpf" style="width:${pct}%"></div></div>`;
+}
+function pickQ(oi){
+  if(qAnswered)return;qAnswered=true;
+  const qs=quizSets[qMode]||quizSets.school;const q=qs[qIdx];const right=oi===q.a;
+  if(right)qScore++;else qLives--;
+  document.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+  document.getElementById('o'+oi).classList.add(right?'rr':'ww');
+  if(!right)document.getElementById('o'+q.a).classList.add('sr');
+  document.getElementById('qmsg').innerHTML=`<span style="color:${right?'#6EE7B7':'#F87171'}">${right?'🦸 Correct!':'😈 Wrong!'}</span>`;
+  document.getElementById('solDiv').innerHTML=`<div class="sol-box ${right?'ok':'ng'}">
+    <div class="sol-hd" style="color:${right?'#6EE7B7':'#FF9933'}">${right?'✅ Correct Answer!':'❌ Wrong! Here is the Right Answer:'}</div>
+    <div class="sol-ans">✓ ${q.o[q.a]}</div>
+    <div class="sol-exp"><strong style="color:var(--gd)">📖 Explanation:</strong> ${q.e}</div>
+    <div class="sol-bb"><span style="font-size:17px;">🦸</span><span style="font-size:11px;color:#FED7AA;">${right?'Excellent '+sName+'! You\'re a Math Hero! 🍬':'Don\'t worry '+sName+'! Even I got this wrong once! Read the explanation carefully and remember it! 💪'}</span></div>
+  </div>`;
+  document.getElementById('nxtBtn').style.display='inline-block';
+  if(qLives<=0)setTimeout(()=>{qOver=true;renderQuiz();},2000);
+}
+function nextQ(){qIdx++;qAnswered=false;if(qLives<=0||qIdx>=(quizSets[qMode]||quizSets.school).length)qOver=true;renderQuiz();}
+function resetQ(){qIdx=0;qScore=0;qLives=3;qAnswered=false;qOver=false;renderQuiz();}
+
+// ══════════════════════════════════════════
+// PRACTICE
+// ══════════════════════════════════════════
+function setPracLevel(mode,btn){
+  pracLevel=mode;
+  document.querySelectorAll('#practice .level-selector .ls-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  buildPractice();
+}
+function showPrac(id,btn){
+  document.querySelectorAll('.pset').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.ptab').forEach(b=>b.classList.remove('on'));
+  document.getElementById('pset-'+id).classList.add('on');btn.classList.add('on');
+}
+function buildPractice(){
+  const bank=practiceBank[pracLevel]||practiceBank.school;
+  const M=bank.mcq||[];const T=bank.tf||[];const VS=bank.vsq||[];const S=bank.sq||[];const L=bank.lq||[];const C=bank.cb||[];
+  document.getElementById('mcq-list').innerHTML=M.map((q,i)=>`<div class="mcq-item"><div class="mcq-q">Q${i+1}. ${q.q}</div><div class="mcq-opts">${q.o.map((o,j)=>`<button class="mopt" id="mq${i}${j}" onclick="pickMCQ(${i},${j},${q.a},'${q.s.replace(/'/g,"&apos;")}')">${String.fromCharCode(65+j)}) ${o}</button>`).join('')}</div><div class="msol" id="ms${i}"></div></div>`).join('');
+  document.getElementById('tf-list').innerHTML=T.map((q,i)=>`<div class="tf-item"><div class="tf-stmt">Q${i+1}. ${q.s}</div><div class="tf-btns"><button class="tfb tb" id="tft${i}" onclick="pickTF(${i},true,${q.a},'${q.sol.replace(/'/g,"&apos;")}')" >✅ TRUE</button><button class="tfb fb" id="tff${i}" onclick="pickTF(${i},false,${q.a},'${q.sol.replace(/'/g,"&apos;")}')" >❌ FALSE</button></div><div class="tfsol" id="tfs${i}"></div></div>`).join('');
+  document.getElementById('vsq-list').innerHTML=VS.map((q,i)=>`<div class="ql-item" style="border-left-color:var(--or);"><div class="ql-marks">⚡ ${q.m}</div><div class="ql-q">Q${i+1}. ${q.q}</div><input class="ql-inp" style="min-height:34px;resize:none;" placeholder="Your answer…"/><button class="sol-tog" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'🙈 Hide':'📖 Solution'">📖 Solution</button><div class="ql-sol">${q.sol}</div></div>`).join('');
+  document.getElementById('sq-list').innerHTML=S.map((q,i)=>`<div class="ql-item"><div class="ql-marks">📝 ${q.m}</div><div class="ql-q">Q${i+1}. ${q.q}</div><textarea class="ql-inp" rows="3" placeholder="Write answer…"></textarea><button class="sol-tog" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'🙈 Hide':'📖 Model Answer'">📖 Model Answer</button><div class="ql-sol">${q.sol}</div></div>`).join('');
+  document.getElementById('lq-list').innerHTML=L.map((q,i)=>`<div class="ql-item" style="border-left-color:var(--pk);"><div class="ql-marks">📄 ${q.m}</div><div class="ql-q">Q${i+1}. ${q.q}</div><textarea class="ql-inp" rows="5" placeholder="Detailed answer…"></textarea><button class="sol-tog" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'🙈 Hide':'📖 Bheem\\'s Model Answer'">📖 Bheem's Model Answer</button><div class="ql-sol">${q.sol}</div></div>`).join('');
+  document.getElementById('cb-list').innerHTML=C.map((cb,i)=>`<div class="case-wrap"><div style="font-family:'Bangers',cursive;font-size:13px;color:var(--or);margin-bottom:8px;letter-spacing:1px;">CASE STUDY ${i+1}</div><div class="case-story">${cb.story}</div>${cb.qs.map((cq,j)=>`<div class="ql-item" style="border-left-color:var(--tl);margin-bottom:8px;"><div class="ql-q">${cq.q}</div><textarea class="ql-inp" rows="2" placeholder="Your answer…"></textarea><button class="sol-tog" onclick="this.nextElementSibling.classList.toggle('open');this.textContent=this.nextElementSibling.classList.contains('open')?'🙈':'📖 Solution'">📖 Solution</button><div class="ql-sol">${cq.sol}</div></div>`).join('')}</div>`).join('');
+}
+function pickMCQ(qi,oi,ca,sol){
+  document.querySelectorAll(`[id^="mq${qi}"]`).forEach(b=>{b.disabled=true;b.classList.add('lk');});
+  document.getElementById(`mq${qi}${oi}`).classList.add(oi===ca?'pr':'pw');
+  if(oi!==ca)document.getElementById(`mq${qi}${ca}`).classList.add('rv');
+  const s=document.getElementById('ms'+qi);s.innerHTML=`<strong>${oi===ca?'✓ Correct!':'✗ Wrong!'} Answer: ${String.fromCharCode(65+ca)}</strong><br>${sol}`;s.classList.add('open');
+  addStar(oi===ca?3:1);
+}
+function pickTF(qi,pick,ca,sol){
+  document.getElementById('tft'+qi).disabled=true;document.getElementById('tff'+qi).disabled=true;
+  document.getElementById('tft'+qi).classList.add('lk');document.getElementById('tff'+qi).classList.add('lk');
+  const right=pick===ca;
+  document.getElementById(`tf${pick?'t':'f'}${qi}`).classList.add(right?'tr':'tw');
+  const s=document.getElementById('tfs'+qi);s.innerHTML=`<strong>${right?'✓ Correct!':'✗ Wrong!'}</strong> ${sol}`;s.classList.add('open');
+  addStar(right?3:1);
+}
+
+// ══════════════════════════════════════════
+// OLYMPIAD
+// ══════════════════════════════════════════
+function buildOlympiad(){
+  document.getElementById('olympiad-list').innerHTML=olympiadData.map((lv,li)=>`<div class="comp-level"><div class="clvl-title">${lv.level} <span class="diff d-${lv.diff}">${lv.diff}</span></div>${lv.qs.map((q,qi)=>`<div class="comp-q"><div class="comp-qtext">Q${qi+1}. ${q.q}</div><div class="comp-opts">${q.o.map((o,oi)=>`<button class="copt" id="co${li}${qi}${oi}" onclick="pickOly(${li},${qi},${oi},${q.a},'${q.s.replace(/'/g,"&apos;")}')">${String.fromCharCode(65+oi)}) ${o}</button>`).join('')}</div><div class="csol" id="cs${li}${qi}"></div></div>`).join('')}</div>`).join('');
+}
+function pickOly(li,qi,oi,ca,sol){
+  document.querySelectorAll(`[id^="co${li}${qi}"]`).forEach(b=>{b.disabled=true;b.classList.add('lk');});
+  document.getElementById(`co${li}${qi}${oi}`).classList.add(oi===ca?'cr':'cw');
+  if(oi!==ca)document.getElementById(`co${li}${qi}${ca}`).classList.add('cs');
+  const s=document.getElementById(`cs${li}${qi}`);s.innerHTML=`<strong style="color:var(--gd)">✓ Answer: ${String.fromCharCode(65+ca)}) ${document.getElementById(`co${li}${qi}${ca}`).textContent.slice(3)}</strong><br><br>${sol}`;s.classList.add('open');
+  addStar(oi===ca?10:2);
+}
+
+// ══════════════════════════════════════════
+// CHAT
+// ══════════════════════════════════════════
+function buildChat(){
+  const topics=['Patterns','Number Theory','Triangular','Square Numbers','Odd Numbers','Virahānka','Geometry','Koch Snowflake','Cube Numbers','IMO Tips'];
+  document.getElementById('chatTopics').innerHTML=topics.map(t=>`<div class="ctop" onclick="chatTopic('${t}')">${t}</div>`).join('');
+  const msgs=document.getElementById('chatMsgs');msgs.innerHTML='';
+  addBotMsg(`Jai Hind! 🦸 I'm Bheem — your Math Hero! Ask me ANYTHING about Chapter 1 — Patterns in Mathematics! I explain in simple language, give examples, and help you understand step by step!<br><br>You can ask in ANY language — I understand! What do you want to know, <strong>${sName}</strong>? 🍬`);
+}
+function chatTopic(t){document.querySelectorAll('.ctop').forEach(b=>b.classList.toggle('on',b.textContent===t));addUChat(t);procChat(t);}
+function sendChat(){const inp=document.getElementById('chatInp');const t=inp.value.trim();if(!t)return;inp.value='';addUChat(t);procChat(t);}
+function addUChat(txt){
+  const msgs=document.getElementById('chatMsgs');
+  const d=document.createElement('div');d.className='cmsg u';
+  d.innerHTML=`<div class="cav">😊</div><div class="cbub">${txt}</div>`;
+  msgs.appendChild(d);
+  const tp=document.createElement('div');tp.className='cmsg b';tp.id='chatTyp';
+  tp.innerHTML=`<div class="cav">🦸</div><div class="td"><div class="tdd"></div><div class="tdd"></div><div class="tdd"></div></div>`;
+  msgs.appendChild(tp);msgs.scrollTop=msgs.scrollHeight;
+}
+function procChat(txt){
+  const lower=txt.toLowerCase();let key='default';
+  for(const k of Object.keys(chatK)){if(lower.includes(k)){key=k;break;}}
+  const r=chatK[key];const reply=r[Math.floor(Math.random()*r.length)];
+  setTimeout(()=>{const t=document.getElementById('chatTyp');if(t)t.remove();addBotMsg(reply);},800+Math.random()*600);
+}
+function addBotMsg(txt){
+  const msgs=document.getElementById('chatMsgs');
+  const d=document.createElement('div');d.className='cmsg b';
+  d.innerHTML=`<div class="cav">🦸</div><div class="cbub">${txt}</div>`;
+  msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;addStar(1);
+}
+
+// ══════════════════════════════════════════
+// TASKS
+// ══════════════════════════════════════════
+function buildTasks(){
+  document.getElementById('taskList').innerHTML=taskData.map((t,i)=>`<div class="tk-card" style="border-left-color:${t.c};"><div class="tk-lbl" style="color:${t.c};">${t.l}</div><div class="tk-q">${t.q}</div><textarea class="tk-inp" rows="2" placeholder="Write your answer here… 🦸" onchange="updateProg()"></textarea></div>`).join('');
+}
+function updateProg(){
+  const f=[...document.querySelectorAll('.tk-inp')].filter(i=>i.value.trim()).length;
+  const p=Math.round(f/taskData.length*100);
+  document.getElementById('progFill').style.width=p+'%';
+  document.getElementById('progLbl').textContent=f+' / '+taskData.length+' Missions Complete';
+}
+function submitTasks(){
+  const f=[...document.querySelectorAll('.tk-inp')].filter(i=>i.value.trim()).length;
+  addStar(f*5);
+  alert(`🦸 Bheem says: "AMAZING, ${sName}! You completed ${f}/${taskData.length} missions! Show your answers to your teacher and earn your MATH HERO BADGE! You earned ${f*5} stars! HIYAAA! 🍬💪"`);
+}
+
+// ══════════════════════════════════════════
+// AUTO LOGIN
+// ══════════════════════════════════════════
+buildParticles();
+(function(){
+  let saved='',lvl='school';
+  try{saved=localStorage.getItem('bheemName')||'';lvl=localStorage.getItem('bheemLevel')||'school';}catch(e){}
+  if(saved.trim()){sName=saved.trim();userLevel=lvl;launchApp();}
+})();
+</script>
+
+</body>
+</html>
